@@ -123,37 +123,15 @@ body::after{width:500px;height:500px;background:radial-gradient(circle,rgba(74,1
 .bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
 .bar-label{width:120px;font-size:12px;color:var(--text);flex-shrink:0;font-weight:500;line-height:1.2}
 .bar-track{flex:1;height:24px;background:rgba(60,60,100,.2);border-radius:5px;overflow:hidden;position:relative}
-.bar-fill{height:100%;border-radius:5px;transition:width 1.2s cubic-bezier(.22,1,.36,1);position:relative;min-width:0;display:flex;align-items:center}
-.bar-fill .bar-val{font-size:10px;font-weight:700;color:#fff;padding-left:6px;white-space:nowrap;opacity:0;transition:opacity .5s ease .6s}
-.bar-fill.show .bar-val{opacity:1}
+.bar-fill{height:100%;border-radius:5px;transition:width .4s ease;position:relative;min-width:0;display:flex;align-items:center}
+.bar-fill .bar-val{font-size:10px;font-weight:700;color:#fff;padding-left:6px;white-space:nowrap}
 .bar-count{min-width:30px;text-align:right;font-size:13px;font-weight:700;color:var(--text2);flex-shrink:0}
-
-.discuss{background:linear-gradient(135deg,rgba(84,160,255,.05),rgba(95,39,205,.03));border-radius:14px;padding:18px;margin:16px 0;border:1px solid rgba(84,160,255,.1)}
-.discuss .d-title{font-size:14px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.discuss .d-item{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04)}
-.discuss .d-item:last-child{border-bottom:none}
-.discuss .d-num{width:22px;height:22px;border-radius:50%;background:rgba(84,160,255,.1);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--blue);flex-shrink:0}
-.discuss .d-text{font-size:13px;color:var(--text2);line-height:1.5;flex:1}
 
 .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
 .actions button{flex:1;min-width:120px;padding:11px 16px;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;transition:var(--transition);font-family:inherit}
-.btn-share{background:rgba(255,255,255,.06);color:var(--text2);border:1px solid var(--border)}
-.btn-share:hover{background:rgba(255,255,255,.1);color:var(--text)}
 .btn-reset{background:rgba(233,69,96,.12);color:var(--accent)}
 .btn-reset:hover{background:rgba(233,69,96,.2)}
-.btn-site{background:rgba(74,124,255,.1);color:var(--blue)}
-.btn-site:hover{background:rgba(74,124,255,.2)}
 
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);z-index:100;justify-content:center;align-items:center}
-.modal.active{display:flex;animation:fadeIn .3s ease}
-.modal-box{background:rgba(26,26,62,.95);border-radius:20px;padding:28px;max-width:320px;width:90%;text-align:center;border:1px solid var(--border);box-shadow:0 8px 60px rgba(0,0,0,.5)}
-.modal-box h3{font-size:17px;margin-bottom:6px}
-.modal-box .sub{color:var(--text2);font-size:12px;margin-bottom:14px}
-.modal-box .qr-img img{width:160px;height:160px;border-radius:10px;background:#fff;padding:5px}
-.modal-box .qr-url{font-size:9px;color:var(--text2);word-break:break-all;margin-top:8px;background:rgba(0,0,0,.3);padding:5px 8px;border-radius:4px;user-select:all}
-.modal-box .close-btn{margin-top:12px;padding:9px 28px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-weight:700;cursor:pointer;font-size:13px;font-family:inherit}
-.modal-box .close-btn:hover{opacity:.9}
-#confetti{z-index:999;pointer-events:none;position:fixed;top:0;left:0;width:100%;height:100%}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
 @media(max-width:560px){
@@ -318,8 +296,8 @@ body::after{width:500px;height:500px;background:radial-gradient(circle,rgba(74,1
   <div class="results" id="resultsContent">
     <div class="doomscore" id="doomscoreBox">
       <div class="ds-lbl">🔥 Твой уровень думскролинга</div>
-      <div class="ds-score" id="doomscoreDisplay">0</div>
-      <div class="ds-desc" id="doomscoreDesc">Загрузка...</div>
+      <div class="ds-score" id="doomscoreDisplay">0/50</div>
+      <div class="ds-desc" id="doomscoreDesc">—</div>
       <div class="ds-tip" id="doomscoreTip"></div>
     </div>
     <div class="profile-grid" id="profileGrid"></div>
@@ -331,30 +309,13 @@ body::after{width:500px;height:500px;background:radial-gradient(circle,rgba(74,1
     </div>
     <div class="insight" id="insightBar"></div>
     <div class="charts" id="chartsContainer"></div>
-    <div class="discuss" id="discussBox">
-      <div class="d-title">💬 Обсуждение для группы</div>
-      <div id="discussItems"></div>
-    </div>
     <div class="actions">
-      <button class="btn-share" id="shareBtn">📤 Поделиться</button>
-      <button class="btn-site" id="siteBtn">📖 Презентация</button>
       <button class="btn-reset" id="resetBtn">🔄 Заново</button>
     </div>
   </div>
 </div>
 </div>
 </div>
-
-<div class="modal" id="qrModal">
-  <div class="modal-box">
-    <h3>📤 Поделиться</h3>
-    <p class="sub">Отсканируй QR или отправь ссылку</p>
-    <div class="qr-img" id="qrContainer"><span style="color:var(--text2);font-size:13px">⏳ Загрузка...</span></div>
-    <div class="qr-url" id="pageUrl"></div>
-    <button class="close-btn" id="closeModal">Готово</button>
-  </div>
-</div>
-<canvas id="confetti"></canvas>
 
 <script>
 (function(){
@@ -418,27 +379,24 @@ function rCharts(all){
     {t:'Продуктивность',k:'q9',lv:['no','slightly','yes'],ln:['Фокус','Немного↓','Сильно↓']},
     {t:'Готовность менять',k:'q10',lv:['no','think','yes'],ln:['Нет','Думаю','Уже меняю']},
   ];
-  const bw=[];
   defs.forEach(function(d,idx){
     let cnt={},tl=0;
     d.lv.forEach(function(v){cnt[v]=0});
     all.forEach(function(r){let v=r[d.k];if(v&&cnt.hasOwnProperty(v)){cnt[v]++;tl++}});
     let box=document.createElement('div');box.className='chart-box';
-    let html='<h3>'+d.t+' <span class="n">('+tl+')</span></h3>';let w=[];
+    let html='<h3>'+d.t+' <span class="n">('+tl+')</span></h3>';
     d.lv.forEach(function(v,i){
-      let pct=tl?Math.round(cnt[v]/tl*100):0;w.push(pct);
+      let pct=tl?Math.round(cnt[v]/tl*100):0;
       let clr=C[i%C.length];
-      html+='<div class="bar-row"><span class="bar-label">'+d.ln[i]+'</span><div class="bar-track"><div class="bar-fill" id="b'+idx+'_'+i+'" style="width:0%;background:'+clr+'"><span class="bar-val">'+cnt[v]+'</span></div></div><span class="bar-count">'+cnt[v]+'</span></div>';
+      html+='<div class="bar-row"><span class="bar-label">'+d.ln[i]+'</span><div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:'+clr+'"><span class="bar-val">'+cnt[v]+'</span></div></div><span class="bar-count">'+cnt[v]+'</span></div>';
     });
-    bw.push(w);box.innerHTML=html;cc.appendChild(box);
-    setTimeout(function(){aB(idx,bw[idx])},50+idx*60);
+    box.innerHTML=html;cc.appendChild(box);
   });
 }
-function aB(idx,pcts){const f=document.querySelectorAll('#chartsContainer .chart-box:nth-child('+(idx+1)+') .bar-fill');f.forEach(function(el,i){let p=pcts[i]||0;el.style.width=p+'%';setTimeout(function(){el.classList.add('show')},600)})}
 
 function $(id){return document.getElementById(id)}
 const D={};
-['welcome','slidesWrap','surveyForm','progressFill','progressNum','prevBtn','nextBtn','surveyCard','wrapper','resultsWrap','anxietySlider','anxietyDisplay','profileGrid','kpiTotal','kpiAnxiety','kpiHeavy','kpiDistract','insightBar','chartsContainer','discussItems','shareBtn','resetBtn','siteBtn','qrModal','qrContainer','pageUrl','closeModal','confetti','doomscoreDisplay','doomscoreDesc','doomscoreTip'].forEach(function(id){D[id]=$(id)});
+['welcome','slidesWrap','surveyForm','progressFill','progressNum','prevBtn','nextBtn','surveyCard','wrapper','resultsWrap','anxietySlider','anxietyDisplay','profileGrid','kpiTotal','kpiAnxiety','kpiHeavy','kpiDistract','insightBar','chartsContainer','resetBtn','doomscoreDisplay','doomscoreDesc','doomscoreTip'].forEach(function(id){D[id]=$(id)});
 
 const T=10;let cur=0;
 
@@ -488,7 +446,7 @@ function sub(){
   let d=gD();d.push(ans);sD(d);
   D.surveyCard.classList.add('hidden');D.resultsWrap.classList.remove('hidden');D.wrapper.classList.add('survey-done');
   D.resultsContent.style.animation='resIn .6s ease';
-  rR();lC();window.scrollTo({top:0,behavior:'smooth'});
+  rR();window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function rR(){
@@ -511,47 +469,13 @@ function rR(){
   let ap=Math.round(nc/n*100);
   D.insightBar.innerHTML=ap>50||ax>6?'⚠️ <strong>'+ap+'%</strong> группы чувствует тревогу. Средняя — <strong>'+ax.toFixed(1)+'/10</strong>.':ap>30?'📊 <strong>'+ap+'%</strong> испытывает дискомфорт. Средняя — <strong>'+ax.toFixed(1)+'/10</strong>.':'✅ <strong>'+ap+'%</strong> чувствует тревогу. Средняя — <strong>'+ax.toFixed(1)+'/10</strong>.';
   rCharts(all);
-  let dc=D.discussItems;let p=[];
-  if(ap>40||ax>5)p.push('Большая часть группы испытывает тревогу. Как это влияет на атмосферу?');
-  if(h/n>.4)p.push('Многие проводят 3+ часа в соцсетях. Какие правила можно ввести?');
-  if(dr/n>.3)p.push('Некоторым сложно оторваться от телефона. Как это мешает работе?');
-  let ir=all.filter(function(r){return r.q6==='irritable'||r.q6==='distracted'}).length;
-  if(ir/n>.3)p.push('Думскролинг влияет на общение. Чем заменить скроллинг в перерывах?');
-  p.push('Какие шаги готов сделать каждый прямо сейчас?');
-  if(ds.score>=30)p.push('У тебя высокий уровень. Что изменишь в первую очередь?');
-  dc.innerHTML=p.map(function(pp,i){return '<div class="d-item"><span class="d-num">'+(i+1)+'</span><span class="d-text">'+pp+'</span></div>'}).join('');
 }
 
-function lC(){
-  let c=D.confetti;let ctx=c.getContext('2d');
-  c.width=window.innerWidth;c.height=window.innerHeight;
-  let p=[],cl=['#e94560','#ff6b81','#ff9f43','#54a0ff','#5f27cd','#1dd1a1','#f368e0','#ffd700'];
-  for(let i=0;i<100;i++)p.push({x:Math.random()*c.width,y:Math.random()*c.height-c.height,w:Math.random()*8+3,h:Math.random()*5+2,color:cl[Math.floor(Math.random()*cl.length)],vx:(Math.random()-.5)*2,vy:Math.random()*2+2,rot:Math.random()*360,rv:(Math.random()-.5)*5,op:1});
-  let f=0;
-  (function an(){ctx.clearRect(0,0,c.width,c.height);let a=0;
-    p.forEach(function(q){q.x+=q.vx;q.y+=q.vy;q.vy+=.03;q.rot+=q.rv;if(q.y>c.height+20||f>150)q.op-=.02;if(q.op>0){a++;ctx.save();ctx.translate(q.x,q.y);ctx.rotate(q.rot*Math.PI/180);ctx.globalAlpha=Math.max(0,q.op);ctx.fillStyle=q.color;ctx.fillRect(-q.w/2,-q.h/2,q.w,q.h);ctx.restore()}});
-    f++;if(a)requestAnimationFrame(an)})();
-}
-
-D.shareBtn.onclick=function(){
-  let url=window.location.href.split('?')[0];D.pageUrl.textContent=url;
-  D.qrContainer.innerHTML='<span style="color:var(--text2);font-size:13px">⏳ Загрузка...</span>';
-  let img=new Image();
-  img.onload=function(){D.qrContainer.innerHTML='';D.qrContainer.appendChild(img)};
-  img.onerror=function(){D.qrContainer.innerHTML='<span style="color:var(--accent);font-size:12px">⚠️ QR не загрузился</span>'};
-  img.src='https://api.qrserver.com/v1/create-qr-code/?size=180x180&data='+encodeURIComponent(url);
-  img.style.width='160px';img.style.height='160px';img.style.borderRadius='10px';img.style.background='#fff';img.style.padding='5px';
-  D.qrModal.classList.add('active');
-};
-D.closeModal.onclick=function(){D.qrModal.classList.remove('active')};
-D.qrModal.onclick=function(e){if(e.target===this)this.classList.remove('active')};
 D.resetBtn.onclick=function(){if(confirm('Очистить все ответы?')){cD();location.reload()}};
-D.siteBtn.onclick=function(){window.location.href='index.html'};
 
 go(0);
 
 document.addEventListener('keydown',function(e){
-  if(D.qrModal.classList.contains('active'))return;
   if(e.key==='ArrowRight')D.nextBtn.click();
   if(e.key==='ArrowLeft')D.prevBtn.click();
 });
