@@ -75,15 +75,7 @@ body{
 .btn-next{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 24px rgba(233,69,96,.3)}
 .btn-next:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(233,69,96,.4)}
 .btn-next:active{transform:scale(.97)}
-.welcome{text-align:center;padding:20px 0 8px}
-.welcome .big-icon{font-size:64px;margin-bottom:12px}
-.welcome .info-items{display:flex;flex-direction:column;gap:10px;margin:20px 0;text-align:left;background:rgba(255,255,255,.03);border-radius:14px;padding:16px 20px}
-.welcome .info-items .ii{display:flex;gap:12px;align-items:flex-start}
-.welcome .info-items .ii .ii-icon{font-size:18px;flex-shrink:0}
-.welcome .info-items .ii .ii-text{font-size:14px;color:var(--text2);line-height:1.4}
-.welcome .info-items .ii .ii-text strong{color:var(--text)}
-.start-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;padding:16px 40px;border-radius:14px;font-size:17px;font-weight:700;cursor:pointer;transition:var(--transition);box-shadow:0 4px 24px rgba(233,69,96,.3);margin-top:8px}
-.start-btn:hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(233,69,96,.4)}
+
 .results-card .card-inner{padding:28px 32px 24px}
 .profile-box{text-align:center;padding:24px;background:linear-gradient(135deg,rgba(233,69,96,.08),rgba(255,107,129,.03));border-radius:16px;margin-bottom:20px;border:1px solid rgba(233,69,96,.15)}
 .profile-box .p-emoji{font-size:52px;margin-bottom:6px}
@@ -98,46 +90,20 @@ body{
 .chart-box{background:rgba(255,255,255,.02);border-radius:14px;padding:16px;border:1px solid var(--border)}
 .chart-box h3{font-size:13px;font-weight:700;color:var(--text2);margin-bottom:12px}
 .chart-box h3 .n{font-weight:400;color:var(--text2)}
-.chart-row{display:flex;align-items:center;gap:16px}
-.chart-canvas-wrap{flex-shrink:0;width:100px;height:100px}
-.chart-canvas-wrap canvas{width:100px;height:100px}
-.chart-labels{flex:1;display:flex;flex-direction:column;gap:4px}
-.cl-item{display:flex;align-items:center;gap:8px;font-size:13px}
-.cl-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.cl-item{display:flex;align-items:center;gap:8px;font-size:13px;padding:2px 0}
 .cl-name{flex:1;color:var(--text)}
-.cl-pct{color:var(--text2);font-weight:700;min-width:50px;text-align:right}
-.cl-bar-wrap{flex:1;height:4px;background:var(--border);border-radius:2px;max-width:100px}
-.cl-bar-fill{height:100%;border-radius:2px;width:0%}
-.discuss-box{background:linear-gradient(135deg,rgba(84,160,255,.06),rgba(95,39,205,.04));border-radius:16px;padding:20px;margin:20px 0;border:1px solid rgba(84,160,255,.15)}
-.discuss-box .d-title{font-size:15px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.discuss-box .d-title .d-ico{font-size:20px}
-.discuss-box .d-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04)}
-.discuss-box .d-item:last-child{border-bottom:none}
-.discuss-box .d-num{width:24px;height:24px;border-radius:50%;background:rgba(84,160,255,.15);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#54a0ff;flex-shrink:0}
-.discuss-box .d-text{font-size:14px;color:var(--text2);line-height:1.5;flex:1}
-.insight-bar{background:linear-gradient(135deg,rgba(233,69,96,.08),rgba(233,69,96,.02));border-radius:12px;padding:14px 18px;margin:16px 0;font-size:14px;line-height:1.7;border-left:3px solid var(--accent)}
-.insight-bar strong{color:var(--accent)}
+.cl-bar-wrap{flex:1;height:6px;background:var(--border);border-radius:3px}
+.cl-bar-fill{height:100%;border-radius:3px;width:0%}
+
 .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
 .actions button{flex:1;min-width:130px;padding:13px 18px;border:none;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;transition:var(--transition)}
-.btn-share{background:rgba(255,255,255,.06);color:var(--text2);border:1px solid var(--border)}
-.btn-share:hover{background:rgba(255,255,255,.1);color:var(--text)}
 .btn-reset{background:rgba(233,69,96,.12);color:var(--accent)}
 .btn-reset:hover{background:rgba(233,69,96,.2)}
-.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);z-index:100;justify-content:center;align-items:center}
-.modal-overlay.active{display:flex;animation:fadeIn .3s ease}
-.modal-box{background:var(--card);border-radius:var(--radius);padding:32px;max-width:340px;width:90%;text-align:center;border:1px solid var(--border);box-shadow:var(--shadow)}
-.modal-box h3{font-size:18px;margin-bottom:8px}
-.modal-box .sub{color:var(--text2);font-size:13px;margin-bottom:16px}
-.modal-box .qr-img img{width:180px;height:180px;border-radius:12px;background:#fff;padding:6px}
-.modal-box .qr-url{font-size:10px;color:var(--text2);word-break:break-all;margin-top:10px;background:rgba(0,0,0,.3);padding:6px 10px;border-radius:6px;user-select:all}
-.modal-box .close-btn{margin-top:14px;padding:10px 30px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-weight:700;cursor:pointer;font-size:14px}
-.modal-box .close-btn:hover{opacity:.9}
-#confetti{z-index:999;pointer-events:none;position:fixed;top:0;left:0;width:100%;height:100%}
 @media(max-width:560px){
   .card-inner{padding:20px 18px 0}.progress-section{padding:0 18px}
   .nav{padding:16px 18px 20px}.header h1{font-size:24px}.slide h2{font-size:18px}
   .kpi-grid{grid-template-columns:repeat(2,1fr)}.range-value{font-size:34px}
-  .actions button{min-width:100%}.welcome .big-icon{font-size:48px}
+  .actions button{min-width:100%}
 }
 @keyframes resultsIn{from{opacity:0;transform:translateY(30px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -160,20 +126,7 @@ body{
       </div>
     </div>
     <div class="card-inner">
-      <div id="welcomeScreen">
-        <div class="welcome">
-          <div class="big-icon">🧠</div>
-          <h2 style="font-size:24px;font-weight:700;margin-bottom:6px">Честный разговор о думскролинге</h2>
-          <p class="sub" style="margin-bottom:4px">Анонимно — результаты увидит вся группа</p>
-          <div class="info-items">
-            <div class="ii"><span class="ii-icon">⏱️</span><span class="ii-text"><strong>2 минуты</strong> — 7 вопросов, анонимно</span></div>
-            <div class="ii"><span class="ii-icon">📊</span><span class="ii-text">После ответа увидишь <strong>результаты всей группы</strong></span></div>
-            <div class="ii"><span class="ii-icon">💬</span><span class="ii-text">В конце — вопросы для <strong>обсуждения в группе</strong></span></div>
-          </div>
-          <button class="start-btn" id="startBtn">Начать опрос →</button>
-        </div>
-      </div>
-      <div class="slides-wrap" id="slidesWrap" style="display:none">
+      <div class="slides-wrap" id="slidesWrap">
         <form id="surveyForm" onsubmit="return false;">
         
         <div class="slide" data-q="q1">
@@ -269,7 +222,7 @@ body{
       </div>
     </div>
     <div class="nav" id="navBtns">
-      <button class="btn-prev" id="prevBtn" disabled>← Назад</button>
+      <button class="btn-prev" id="prevBtn" disabled>←</button>
       <button class="btn-next" id="nextBtn">Далее →</button>
     </div>
   </div>
@@ -289,14 +242,8 @@ body{
         <div class="kpi"><div class="num" id="kpiHeavy">0%</div><div class="lbl">Скроллят >3ч</div></div>
         <div class="kpi"><div class="num" id="kpiDistract">0%</div><div class="lbl">Отвлекаются</div></div>
       </div>
-      <div class="insight-bar" id="insightBar"></div>
       <div class="charts-grid" id="chartsContainer"></div>
-      <div class="discuss-box" id="discussBox">
-        <div class="d-title"><span class="d-ico">💬</span> Обсуждение для группы</div>
-        <div id="discussItems"></div>
-      </div>
       <div class="actions">
-        <button class="btn-share" id="shareBtn">📤 Поделиться</button>
         <button class="btn-reset" id="resetBtn">🔄 Заново</button>
       </div>
     </div>
@@ -304,17 +251,6 @@ body{
 </div>
 
 
-<div class="modal-overlay" id="qrModal">
-  <div class="modal-box">
-    <h3>📤 Поделиться опросом</h3>
-    <p class="sub">Отсканируй QR или отправь ссылку</p>
-    <div class="qr-img" id="qrContainer"><span style="color:var(--text2);font-size:14px">⏳ Загрузка...</span></div>
-    <div class="qr-url" id="pageUrl"></div>
-    <button class="close-btn" id="closeModal">Готово</button>
-  </div>
-</div>
-
-<canvas id="confetti"></canvas>
 
 <script>
 (function(){
@@ -346,8 +282,6 @@ function calcLevel(a){
 }
 
 
-const ws=document.getElementById('welcomeScreen');
-const sw=document.getElementById('slidesWrap');
 const slides=document.querySelectorAll('.slide');
 const pf=document.getElementById('progressFill');
 const pn=document.getElementById('progressNum');
@@ -355,15 +289,8 @@ const prev=document.getElementById('prevBtn');
 const next=document.getElementById('nextBtn');
 const surveyCard=document.getElementById('surveyCard');
 const resultsCard=document.getElementById('resultsCard');
-const T=7; 
+const T=7;
 let cur=0;
-
-
-document.getElementById('startBtn').onclick=function(){
-  ws.style.display='none';
-  sw.style.display='block';
-  go(0);
-};
 
 function go(i){
   slides.forEach((s,j)=>s.classList.toggle('active',j===i));
@@ -440,7 +367,6 @@ function submitSurvey(){
   resultsCard.classList.remove('hidden');
   resultsCard.classList.add('results-enter');
   renderResults();
-  launchConfetti();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -466,16 +392,6 @@ function renderResults(){
   document.getElementById('kpiDistract').textContent=Math.round(distr/n*100)+'%';
 
   
-  const anxC=data.filter(function(r){return r.q3==='anxious'||r.q3==='depressed'}).length;
-  const ap=Math.round(anxC/n*100);
-  const ib=document.getElementById('insightBar');
-  let txt;
-  if(ap>50||avgAnx>6)txt='⚠️ <strong>'+ap+'%</strong> группы чувствует тревогу или подавленность после скроллинга. Средняя тревога — <strong>'+avgAnx.toFixed(1)+'/10</strong>.';
-  else if(ap>30)txt='📊 <strong>'+ap+'%</strong> группы испытывает дискомфорт после скроллинга. Средняя тревога — <strong>'+avgAnx.toFixed(1)+'/10</strong>.';
-  else txt='✅ В этой группе только <strong>'+ap+'%</strong> чувствует тревогу. Средняя тревога — <strong>'+avgAnx.toFixed(1)+'/10</strong>.';
-  ib.innerHTML=txt;
-
-  
   const chartsContainer=document.getElementById('chartsContainer');
   chartsContainer.innerHTML='';
   const defs=[
@@ -494,113 +410,29 @@ function renderResults(){
     });
     if(tl===0){tl=1;};
     var sec=document.createElement('div');sec.className='chart-box';
-    var h='<h3>'+d.t+' <span class="n">('+tl+' ответов)</span></h3><div class="chart-row"><div class="chart-canvas-wrap"><canvas id="ch'+i+'"></canvas></div><div class="chart-labels">';
+    var h='<h3>'+d.t+' <span class="n">('+tl+' ответов)</span></h3><div class="chart-labels">';
     d.l.forEach(function(l,j){
       var p=Math.round(cnt[l]/tl*100);
       var cl=C[j%C.length];
-      h+='<div class="cl-item"><span class="cl-dot" style="background:'+cl+'"></span><span class="cl-name">'+d.n[j]+'</span><div class="cl-bar-wrap"><div class="cl-bar-fill" style="width:'+p+'%;background:'+cl+'"></div></div><span class="cl-pct">'+p+'%</span></div>';
+      h+='<div class="cl-item"><span class="cl-name">'+d.n[j]+'</span><div class="cl-bar-wrap"><div class="cl-bar-fill" style="width:'+p+'%;background:'+cl+'"></div></div></div>';
     });
-    h+='</div></div></div>';
+    h+='</div></div>';
     sec.innerHTML=h;
     chartsContainer.appendChild(sec);
-    setTimeout(function(){drawPie('ch'+i,d.l.map(function(l){return cnt[l]}),d.n)},150);
   });
-
-  
-  var dc=document.getElementById('discussItems');
-  var prompts=[];
-  if(ap>40||avgAnx>5)prompts.push('Большая часть группы испытывает тревогу после скроллинга. Как это влияет на атмосферу?');
-  if(heavy/n>0.4)prompts.push('Многие проводят в соцсетях 3+ часа. Какие правила работы с телефоном можно ввести?');
-  if(distr/n>0.3)prompts.push('Некоторым сложно оторваться от телефона при разговоре. Как это мешает командной работе?');
-  var irr=data.filter(function(r){return r.q6==='irritable'||r.q6==='distracted'}).length;
-  if(irr/n>0.3)prompts.push('Думскроллинг влияет на качество общения. Что можно предложить вместо скроллинга в перерывах?');
-  prompts.push('Что каждый может сделать, чтобы снизить влияние телефона на общение в группе?');
-  dc.innerHTML=prompts.map(function(p,i){return '<div class="d-item"><span class="d-num">'+(i+1)+'</span><span class="d-text">'+p+'</span></div>'}).join('');
 }
 
-
-function drawPie(id,vals){
-  var c=document.getElementById(id);
-  if(!c)return;
-  var sz=100,dpr=window.devicePixelRatio||1;
-  c.width=sz*dpr;c.height=sz*dpr;
-  c.style.width=sz+'px';c.style.height=sz+'px';
-  var ctx=c.getContext('2d');
-  ctx.scale(dpr,dpr);
-  var cx=sz/2,cy=sz/2,r=sz/2-6;
-  var tl=0;vals.forEach(function(v){tl+=v});
-  if(tl===0){
-    ctx.fillStyle='#2a2a50';
-    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fill();
-    return;
-  }
-  var sa=-Math.PI/2;
-  vals.forEach(function(v,i){
-    if(v===0)return;
-    var a=(v/tl)*Math.PI*2;
-    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,sa,sa+a);ctx.closePath();
-    ctx.fillStyle=C[i%C.length];ctx.fill();
-    sa+=a;
-  });
-  ctx.beginPath();ctx.arc(cx,cy,r*0.5,0,Math.PI*2);ctx.fillStyle='#13132b';ctx.fill();
-}
-
-
-function launchConfetti(){
-  var c=document.getElementById('confetti');
-  var ctx=c.getContext('2d');
-  c.width=window.innerWidth;c.height=window.innerHeight;
-  var p=[],colors=['#e94560','#ff6b81','#ff9f43','#54a0ff','#5f27cd','#1dd1a1','#f368e0','#ffd700'];
-  for(var i=0;i<120;i++)p.push({x:Math.random()*c.width,y:Math.random()*c.height-c.height,
-    w:Math.random()*8+3,h:Math.random()*5+2,color:colors[Math.floor(Math.random()*colors.length)],
-    vx:(Math.random()-.5)*2,vy:Math.random()*2+2,rot:Math.random()*360,rv:(Math.random()-.5)*5,op:1});
-  var f=0;
-  function anim(){
-    ctx.clearRect(0,0,c.width,c.height);
-    var a=0;
-    p.forEach(function(q){
-      q.x+=q.vx;q.y+=q.vy;q.vy+=.03;q.rot+=q.rv;
-      if(q.y>c.height+20||f>150)q.op-=.02;
-      if(q.op>0){a++;ctx.save();ctx.translate(q.x,q.y);ctx.rotate(q.rot*Math.PI/180);
-        ctx.globalAlpha=Math.max(0,q.op);ctx.fillStyle=q.color;ctx.fillRect(-q.w/2,-q.h/2,q.w,q.h);ctx.restore()}
-    });f++;if(a)requestAnimationFrame(anim);else if(c.parentNode)c.parentNode.removeChild(c);
-  }anim();
-}
-
-
-document.getElementById('shareBtn').onclick=function(){
-  var m=document.getElementById('qrModal');
-  var url=window.location.href;
-  document.getElementById('pageUrl').textContent=url;
-  var c=document.getElementById('qrContainer');
-  c.innerHTML='<span style="color:var(--text2);font-size:14px">⏳ Загрузка...</span>';
-  var img=new Image();
-  img.onload=function(){c.innerHTML='';c.appendChild(img)};
-  img.onerror=function(){c.innerHTML='<span style="color:var(--accent);font-size:13px">⚠️ Не удалось загрузить QR</span>'};
-  img.src='https://api.qrserver.com/v1/create-qr-code/?size=180x180&data='+encodeURIComponent(url);
-  img.alt='QR';
-  img.style.width='180px';img.style.height='180px';img.style.borderRadius='12px';img.style.background='#fff';img.style.padding='6px';
-  m.classList.add('active');
-};
-document.getElementById('closeModal').onclick=function(){document.getElementById('qrModal').classList.remove('active')};
-document.getElementById('qrModal').onclick=function(e){if(e.target===this)this.classList.remove('active')};
 
 document.getElementById('resetBtn').onclick=function(){if(confirm('Очистить все ответы?')){clearData();location.reload()}};
 
 
 document.addEventListener('keydown',function(e){
-  if(document.getElementById('qrModal').classList.contains('active'))return;
   if(e.key==='ArrowRight'||e.key==='Enter')next.click();
   if(e.key==='ArrowLeft')prev.click();
 });
 
 
-if(getData().length>0){
-  surveyCard.classList.add('hidden');
-  resultsCard.classList.remove('hidden');
-  setTimeout(function(){resultsCard.classList.add('results-enter')},50);
-  renderResults();
-}
+go(0);
 })();
 </script>
 </body>
