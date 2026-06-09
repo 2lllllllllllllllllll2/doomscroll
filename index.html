@@ -9,7 +9,7 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#060612;--accent:#e94560;--accent2:#ff6b81;--accent3:#ff9f43;--blue:#4a7cff;--text:#eeeef8;--text2:#8888bb;--text3:#55557a}
-html,body{height:100%;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);overflow:hidden;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100%;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
 .scene{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
 .scene .orb{position:absolute;border-radius:50%;filter:blur(100px)}
 .scene .orb:nth-child(1){width:600px;height:600px;background:radial-gradient(circle,rgba(233,69,96,.12),transparent 70%);top:-200px;right:-150px;animation:fl1 25s ease-in-out infinite}
@@ -19,9 +19,8 @@ html,body{height:100%;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-
 @keyframes fl2{0%,100%{transform:translate(0,0)}33%{transform:translate(60px,-70px)}66%{transform:translate(-50px,60px)}}
 @keyframes fl3{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-40px)}}
 
-.slides{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1}
-.slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:60px 40px;opacity:0;transform:scale(.95);transition:opacity .7s ease,transform .7s ease;pointer-events:none}
-.slide.active{opacity:1;transform:scale(1);pointer-events:all}
+.slides{position:relative;z-index:1;width:100%;height:auto}
+.slide{position:relative;min-height:100vh;width:100%;display:flex;align-items:center;justify-content:center;padding:60px 40px;opacity:1;transform:none;pointer-events:all}
 .slide-inner{width:100%;max-width:1000px;position:relative}
 .slide-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;background:rgba(233,69,96,.08);border:1px solid rgba(233,69,96,.12);color:var(--accent);margin-bottom:16px}
 .slide h1{font-size:clamp(36px,5vw,64px);font-weight:900;letter-spacing:-1.5px;line-height:1.03;margin-bottom:12px}
@@ -330,22 +329,33 @@ for(let i=0;i<T;i++){const d=document.createElement('button');d.className='dot'+
 document.getElementById('slideNum').textContent='1 / '+T;
 
 function go(i){
-  document.querySelectorAll('.slide').forEach(function(s,j){s.classList.toggle('active',j===i)});
+  document.querySelectorAll('.slide')[i].scrollIntoView({behavior:'smooth'});
   cur=i;
   document.querySelectorAll('.dot').forEach(function(d,j){d.classList.toggle('active',j===i)});
   document.getElementById('slideNum').textContent=(i+1)+' / '+T;
 }
 window.go=go;
 
-document.addEventListener('keydown',function(e){
-  if(e.key==='ArrowRight')go(Math.min(cur+1,T-1));
-  if(e.key==='ArrowLeft')go(Math.max(cur-1,0));
+var st;
+document.addEventListener('scroll',function(){
+  clearTimeout(st);
+  st=setTimeout(function(){
+    var sl=document.querySelectorAll('.slide');
+    var c=0,md=Infinity,vc=window.scrollY+window.innerHeight/2;
+    sl.forEach(function(s,i){
+      var r=s.getBoundingClientRect(),sc=r.top+window.scrollY+r.height/2,d=Math.abs(vc-sc);
+      if(d<md){md=d;c=i}
+    });
+    if(c!==cur){cur=c;
+      document.querySelectorAll('.dot').forEach(function(d,j){d.classList.toggle('active',j===cur)});
+      document.getElementById('slideNum').textContent=(cur+1)+' / '+T;
+    }
+  },50);
 });
-let sx=0;
-document.addEventListener('touchstart',function(e){sx=e.touches[0].clientX});
-document.addEventListener('touchend',function(e){
-  const dx=e.changedTouches[0].clientX-sx;
-  if(Math.abs(dx)>50){if(dx<0)go(Math.min(cur+1,T-1));else go(Math.max(cur-1,0))}
+
+document.addEventListener('keydown',function(e){
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')go(Math.min(cur+1,T-1));
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(Math.max(cur-1,0));
 });
 })();
 </script>
