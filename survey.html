@@ -2,500 +2,605 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Думскролинг — опрос</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#060612;--accent:#e94560;--accent2:#ff6b81;--accent3:#ff9f43;--blue:#4a7cff;--text:#eeeef8;--text2:#8888bb;--text3:#55557a;--border:rgba(40,40,80,.5);--transition:.4s cubic-bezier(.22,1,.36,1)}
-html,body{height:100%;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
-body::before,body::after{content:'';position:fixed;pointer-events:none;z-index:0;border-radius:50%}
-body::before{width:600px;height:600px;background:radial-gradient(circle,rgba(233,69,96,.08),transparent 70%);top:-200px;right:-200px;animation:f1 20s ease-in-out infinite}
-body::after{width:500px;height:500px;background:radial-gradient(circle,rgba(74,124,255,.06),transparent 70%);bottom:-150px;left:-150px;animation:f2 25s ease-in-out infinite}
-@keyframes f1{0%,100%{transform:translate(0,0)}33%{transform:translate(-40px,50px)}66%{transform:translate(30px,-30px)}}
-@keyframes f2{0%,100%{transform:translate(0,0)}33%{transform:translate(50px,-40px)}66%{transform:translate(-30px,40px)}}
-
-.wrapper{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:32px 20px}
-.wrapper.survey-done{justify-content:center}
-.container{width:100%;max-width:640px}
-
-.hero{text-align:center;margin-bottom:24px}
-.hero .label{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;font-size:11px;font-weight:600;background:rgba(233,69,96,.07);border:1px solid rgba(233,69,96,.1);color:var(--accent);letter-spacing:.15px;margin-bottom:14px}
-.hero .label .pulse{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(233,69,96,.4)}50%{opacity:.6;box-shadow:0 0 0 6px rgba(233,69,96,0)}}
-.hero h1{font-size:clamp(28px,5vw,44px);font-weight:900;letter-spacing:-1px;line-height:1.05;margin-bottom:4px}
-.hero h1 .grad{background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero .desc{font-size:14px;color:var(--text2);line-height:1.5}
-
-.card{background:rgba(14,14,34,.85);backdrop-filter:blur(24px) saturate(1.2);-webkit-backdrop-filter:blur(24px) saturate(1.2);border-radius:20px;border:1px solid var(--border);box-shadow:0 8px 60px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.04) inset;overflow:hidden}
-.card.hidden{display:none}
-.hidden{display:none!important}
-.card-inner{padding:32px 32px 0}
-.progress-section{padding:0 32px;margin-bottom:8px}
-.progress-row{display:flex;align-items:center;gap:12px}
-.progress-track{flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
-.progress-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .6s ease;width:0%}
-.progress-num{font-size:13px;font-weight:700;color:var(--text2);min-width:36px;text-align:right}
-
-.slides-wrap{position:relative;min-height:340px}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a18;--card:#13132b;--card2:#1a1a3e;
+  --accent:#e94560;--accent2:#ff6b81;--accent3:#ff9f43;
+  --text:#f0f0f5;--text2:#8888aa;--border:#2a2a50;
+  --radius:20px;--shadow:0 8px 40px rgba(0,0,0,.6);
+  --transition:0.45s cubic-bezier(.22,1,.36,1);
+}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  background:var(--bg);color:var(--text);min-height:100vh;display:flex;justify-content:center;padding:16px;
+  background-image:radial-gradient(ellipse 80% 60% at 10% 20%,rgba(233,69,96,.06),transparent),radial-gradient(ellipse 80% 60% at 90% 80%,rgba(84,160,255,.06),transparent);
+}
+.container{max-width:700px;width:100%}
+.header{text-align:center;padding:36px 20px 16px}
+.header h1{font-size:30px;font-weight:800;letter-spacing:-.5px;margin-bottom:4px}
+.header h1 .grad{background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.header p{color:var(--text2);font-size:14px;margin-bottom:8px}
+.badge-row{display:flex;gap:8px;justify-content:center;margin-top:10px}
+.badge{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--text2)}
+.badge.active{background:rgba(233,69,96,.12);border-color:rgba(233,69,96,.3);color:var(--accent)}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);overflow:hidden}.card.hidden{display:none}
+.card.results-enter{animation:resultsIn .6s ease}
+.card-inner{padding:28px 32px 0}
+.progress-section{padding:0 32px;margin-bottom:4px}
+.progress-row{display:flex;align-items:center;gap:14px}
+.progress-track{flex:1;height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .6s ease;width:0%}
+.progress-num{font-size:13px;font-weight:700;color:var(--text2);min-width:42px;text-align:right}
+.slides-wrap{position:relative;min-height:360px}
 .slide{display:none;animation:slideIn .4s ease}
 .slide.active{display:block}
 @keyframes slideIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-.slide-step{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
-.step-dot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;background:rgba(255,255,255,.05);color:var(--text3);transition:var(--transition);flex-shrink:0}
+.slide-step{display:flex;gap:8px;margin-bottom:6px}
+.step-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;background:var(--border);color:var(--text2);transition:var(--transition);flex-shrink:0}
 .step-dot.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
-.step-dot.done{background:rgba(233,69,96,.15);color:var(--accent)}
-.slide-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--accent);margin-bottom:4px}
-.slide h2{font-size:20px;font-weight:700;line-height:1.3;margin-bottom:2px}
-.slide .sub{font-size:13px;color:var(--text2);margin-bottom:18px;line-height:1.4;transition:.3s}
+.step-dot.done{background:rgba(233,69,96,.2);color:var(--accent)}
+.slide-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:2px}
+.slide h2{font-size:21px;font-weight:700;line-height:1.3;margin-bottom:4px}
+.slide .sub{font-size:14px;color:var(--text2);margin-bottom:20px;line-height:1.4;transition:.3s}
 .slide .sub.err{color:var(--accent)!important;font-weight:600}
-
-.options{display:flex;flex-direction:column;gap:8px}
-.opt{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(255,255,255,.03);border:2px solid var(--border);border-radius:12px;cursor:pointer;transition:var(--transition)}
-.opt:hover{border-color:rgba(233,69,96,.25);background:rgba(233,69,96,.05)}
+.options{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:center;gap:14px;padding:14px 18px;background:rgba(255,255,255,.03);border:2px solid var(--border);border-radius:14px;cursor:pointer;transition:var(--transition)}
+.opt:hover{border-color:rgba(233,69,96,.3);background:rgba(233,69,96,.05)}
 .opt input{position:absolute;opacity:0;pointer-events:none}
-.opt .radio{width:20px;height:20px;border-radius:50%;border:2px solid var(--text3);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:var(--transition)}
-.opt .radio::after{content:'';width:9px;height:9px;border-radius:50%;background:var(--accent);transform:scale(0);transition:var(--transition)}
-.opt .ico{font-size:18px;flex-shrink:0}
-.opt .lbl{font-size:14px;font-weight:500;flex:1;color:var(--text2)}
-.opt .subtxt{font-size:11px;color:var(--text3);display:block;margin-top:2px;font-weight:400}
+.opt .radio{width:22px;height:22px;border-radius:50%;border:2px solid var(--text2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:var(--transition)}
+.opt .radio::after{content:'';width:10px;height:10px;border-radius:50%;background:var(--accent);transform:scale(0);transition:var(--transition)}
+.opt .ico{font-size:20px;flex-shrink:0}
+.opt .lbl{font-size:15px;font-weight:500;flex:1;transition:var(--transition);color:var(--text2)}
+.opt .subtxt{font-size:12px;color:var(--text2);display:block;margin-top:1px;font-weight:400}
 .opt.selected{border-color:var(--accent);background:rgba(233,69,96,.08)}
 .opt.selected .radio{border-color:var(--accent)}
 .opt.selected .radio::after{transform:scale(1)}
 .opt.selected .lbl{color:var(--text)}
 .range-wrap{padding:8px 0}
-.range-wrap input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:5px;border-radius:3px;background:var(--border);outline:none}
-.range-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--accent);cursor:pointer;border:3px solid rgba(14,14,34,.9);box-shadow:0 0 20px rgba(233,69,96,.3)}
-.range-wrap input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--accent);cursor:pointer;border:3px solid rgba(14,14,34,.9)}
-.range-ticks{display:flex;justify-content:space-between;margin:4px 0 0}
-.range-ticks span{width:2px;height:6px;background:var(--border);border-radius:1px}
-.range-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-top:4px}
-.range-value{text-align:center;font-size:40px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin:6px 0 2px}
-.range-value .suf{font-size:14px;font-weight:400;color:var(--text2);-webkit-text-fill-color:var(--text2)}
-
-.nav{display:flex;gap:8px;padding:20px 32px 28px}
-.nav button{flex:1;padding:12px;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;transition:var(--transition);font-family:inherit}
-.btn-prev{background:rgba(255,255,255,.05);color:var(--text2)}
-.btn-prev:hover{background:rgba(255,255,255,.1);color:var(--text)}
-.btn-prev:disabled{opacity:.2;cursor:default}
-.btn-next{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 20px rgba(233,69,96,.25)}
-.btn-next:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(233,69,96,.35);}
-
+.range-wrap input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:3px;background:var(--border);outline:none}
+.range-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:26px;height:26px;border-radius:50%;background:var(--accent);cursor:pointer;border:3px solid var(--card);box-shadow:0 0 24px rgba(233,69,96,.35)}
+.range-wrap input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--accent);cursor:pointer;border:3px solid var(--card)}
+.range-ticks{display:flex;justify-content:space-between;margin:6px 0 0}
+.range-ticks span{width:2px;height:8px;background:var(--border);border-radius:1px}
+.range-labels{display:flex;justify-content:space-between;font-size:12px;color:var(--text2);margin-top:6px}
+.range-value{text-align:center;font-size:44px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin:6px 0 2px}
+.range-value .suf{font-size:16px;font-weight:400;color:var(--text2);-webkit-text-fill-color:var(--text2)}
+.nav{display:flex;gap:10px;padding:20px 32px 28px}
+.nav button{flex:1;padding:14px;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;transition:var(--transition)}
+.btn-prev{background:rgba(255,255,255,.05);color:var(--text2)}.btn-prev:hover{background:rgba(255,255,255,.1);color:var(--text)}
+.btn-prev:disabled{opacity:.25;cursor:default}
+.btn-next{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 24px rgba(233,69,96,.3)}
+.btn-next:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(233,69,96,.4)}
+.btn-next:active{transform:scale(.97)}
 .welcome{text-align:center;padding:20px 0 8px}
-.welcome .big-icon{font-size:60px;margin-bottom:10px}
-.welcome h2{font-size:22px;font-weight:700;margin-bottom:4px}
-.welcome .sub{font-size:14px;color:var(--text2);margin-bottom:16px}
-.welcome .info-items{display:flex;flex-direction:column;gap:10px;margin:18px 0;text-align:left;background:rgba(255,255,255,.025);border-radius:12px;padding:16px 20px}
-.welcome .info-items .ii{display:flex;gap:10px;align-items:flex-start}
+.welcome .big-icon{font-size:64px;margin-bottom:12px}
+.welcome .info-items{display:flex;flex-direction:column;gap:10px;margin:20px 0;text-align:left;background:rgba(255,255,255,.03);border-radius:14px;padding:16px 20px}
+.welcome .info-items .ii{display:flex;gap:12px;align-items:flex-start}
 .welcome .info-items .ii .ii-icon{font-size:18px;flex-shrink:0}
 .welcome .info-items .ii .ii-text{font-size:14px;color:var(--text2);line-height:1.4}
 .welcome .info-items .ii .ii-text strong{color:var(--text)}
-.start-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;padding:14px 40px;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:var(--transition);box-shadow:0 4px 24px rgba(233,69,96,.25);margin-top:4px;font-family:inherit}
-.start-btn:hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(233,69,96,.35)}
-
-.results{padding:32px;animation:resIn .6s ease}
-@keyframes resIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-
-.doomscore{background:linear-gradient(135deg,rgba(233,69,96,.08),rgba(233,69,96,.02));border-radius:16px;padding:20px;margin-bottom:20px;text-align:center;border:1px solid rgba(233,69,96,.12)}
-.doomscore .ds-lbl{font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
-.doomscore .ds-score{font-size:clamp(40px,6vw,56px);font-weight:900;line-height:1}
-.doomscore .ds-desc{font-size:16px;color:var(--text);margin-top:6px;font-weight:600}
-.doomscore .ds-tip{font-size:13px;color:var(--text2);margin-top:4px}
-
-.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:20px}
-.profile-item{background:rgba(255,255,255,.025);border-radius:12px;padding:14px 12px;text-align:center;border:1px solid var(--border)}
-.profile-item .pi-ico{font-size:24px;display:block;margin-bottom:2px}
-.profile-item .pi-val{font-size:20px;font-weight:800;color:var(--text);display:block}
-.profile-item .pi-lbl{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:.3px;font-weight:600}
-
-.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px}
-.kpi{background:rgba(255,255,255,.025);border-radius:10px;padding:12px 6px;text-align:center;border:1px solid var(--border)}
-.kpi .k-num{font-size:22px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2}
-.kpi .k-lbl{font-size:9px;color:var(--text2);margin-top:2px;text-transform:uppercase;letter-spacing:.3px;font-weight:600}
-
-.insight{background:linear-gradient(135deg,rgba(233,69,96,.05),rgba(233,69,96,.01));border-radius:10px;padding:14px 16px;margin-bottom:16px;font-size:14px;line-height:1.6;border-left:3px solid var(--accent)}
-.insight strong{color:var(--accent)}
-
-.charts{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
-.chart-box{background:rgba(255,255,255,.02);border-radius:12px;padding:16px;border:1px solid var(--border)}
-.chart-box h3{font-size:12px;font-weight:700;color:var(--text2);margin-bottom:10px}
-.chart-box h3 .n{font-weight:400;color:var(--text3)}
-.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
-.bar-label{width:120px;font-size:12px;color:var(--text);flex-shrink:0;font-weight:500;line-height:1.2}
-.bar-track{flex:1;height:24px;background:rgba(60,60,100,.2);border-radius:5px;overflow:hidden;position:relative}
-.bar-fill{height:100%;border-radius:5px;transition:width .4s ease;position:relative;min-width:0;display:flex;align-items:center}
-.bar-fill .bar-val{font-size:10px;font-weight:700;color:#fff;padding-left:6px;white-space:nowrap}
-.bar-count{min-width:30px;text-align:right;font-size:13px;font-weight:700;color:var(--text2);flex-shrink:0}
-
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
-.actions button{flex:1;min-width:120px;padding:11px 16px;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;transition:var(--transition);font-family:inherit}
+.start-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;padding:16px 40px;border-radius:14px;font-size:17px;font-weight:700;cursor:pointer;transition:var(--transition);box-shadow:0 4px 24px rgba(233,69,96,.3);margin-top:8px}
+.start-btn:hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(233,69,96,.4)}
+.results-card .card-inner{padding:28px 32px 24px}
+.profile-box{text-align:center;padding:24px;background:linear-gradient(135deg,rgba(233,69,96,.08),rgba(255,107,129,.03));border-radius:16px;margin-bottom:20px;border:1px solid rgba(233,69,96,.15)}
+.profile-box .p-emoji{font-size:52px;margin-bottom:6px}
+.profile-box .p-title{font-size:24px;font-weight:800;color:#fff;margin-bottom:2px}
+.profile-box .p-desc{font-size:14px;color:var(--text2);line-height:1.5}
+.profile-box .p-tag{margin-top:10px;display:inline-block;padding:4px 16px;border-radius:20px;font-size:12px;font-weight:700;background:rgba(233,69,96,.15);color:var(--accent)}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.kpi{background:rgba(255,255,255,.03);border-radius:12px;padding:14px 8px;text-align:center;border:1px solid var(--border)}
+.kpi .num{font-size:26px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2}
+.kpi .lbl{font-size:10px;color:var(--text2);margin-top:2px;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.charts-grid{display:flex;flex-direction:column;gap:14px;margin-bottom:16px}
+.chart-box{background:rgba(255,255,255,.02);border-radius:14px;padding:16px;border:1px solid var(--border)}
+.chart-box h3{font-size:13px;font-weight:700;color:var(--text2);margin-bottom:12px}
+.chart-box h3 .n{font-weight:400;color:var(--text2)}
+.chart-row{display:flex;align-items:center;gap:16px}
+.chart-canvas-wrap{flex-shrink:0;width:100px;height:100px}
+.chart-canvas-wrap canvas{width:100px;height:100px}
+.chart-labels{flex:1;display:flex;flex-direction:column;gap:4px}
+.cl-item{display:flex;align-items:center;gap:8px;font-size:13px}
+.cl-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.cl-name{flex:1;color:var(--text)}
+.cl-pct{color:var(--text2);font-weight:700;min-width:50px;text-align:right}
+.cl-bar-wrap{flex:1;height:4px;background:var(--border);border-radius:2px;max-width:100px}
+.cl-bar-fill{height:100%;border-radius:2px;width:0%}
+.discuss-box{background:linear-gradient(135deg,rgba(84,160,255,.06),rgba(95,39,205,.04));border-radius:16px;padding:20px;margin:20px 0;border:1px solid rgba(84,160,255,.15)}
+.discuss-box .d-title{font-size:15px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.discuss-box .d-title .d-ico{font-size:20px}
+.discuss-box .d-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.discuss-box .d-item:last-child{border-bottom:none}
+.discuss-box .d-num{width:24px;height:24px;border-radius:50%;background:rgba(84,160,255,.15);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#54a0ff;flex-shrink:0}
+.discuss-box .d-text{font-size:14px;color:var(--text2);line-height:1.5;flex:1}
+.insight-bar{background:linear-gradient(135deg,rgba(233,69,96,.08),rgba(233,69,96,.02));border-radius:12px;padding:14px 18px;margin:16px 0;font-size:14px;line-height:1.7;border-left:3px solid var(--accent)}
+.insight-bar strong{color:var(--accent)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.actions button{flex:1;min-width:130px;padding:13px 18px;border:none;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;transition:var(--transition)}
+.btn-share{background:rgba(255,255,255,.06);color:var(--text2);border:1px solid var(--border)}
+.btn-share:hover{background:rgba(255,255,255,.1);color:var(--text)}
 .btn-reset{background:rgba(233,69,96,.12);color:var(--accent)}
 .btn-reset:hover{background:rgba(233,69,96,.2)}
-
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);z-index:100;justify-content:center;align-items:center}
+.modal-overlay.active{display:flex;animation:fadeIn .3s ease}
+.modal-box{background:var(--card);border-radius:var(--radius);padding:32px;max-width:340px;width:90%;text-align:center;border:1px solid var(--border);box-shadow:var(--shadow)}
+.modal-box h3{font-size:18px;margin-bottom:8px}
+.modal-box .sub{color:var(--text2);font-size:13px;margin-bottom:16px}
+.modal-box .qr-img img{width:180px;height:180px;border-radius:12px;background:#fff;padding:6px}
+.modal-box .qr-url{font-size:10px;color:var(--text2);word-break:break-all;margin-top:10px;background:rgba(0,0,0,.3);padding:6px 10px;border-radius:6px;user-select:all}
+.modal-box .close-btn{margin-top:14px;padding:10px 30px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-weight:700;cursor:pointer;font-size:14px}
+.modal-box .close-btn:hover{opacity:.9}
+#confetti{z-index:999;pointer-events:none;position:fixed;top:0;left:0;width:100%;height:100%}
 @media(max-width:560px){
-  .wrapper{padding:20px 12px}
-  .card-inner{padding:20px 16px 0}
-  .progress-section{padding:0 16px}
-  .results{padding:20px}
-  .nav{padding:16px 16px 20px}
-  .slide h2{font-size:18px}
-  .kpi-grid{grid-template-columns:repeat(2,1fr)}
-  .profile-grid{grid-template-columns:1fr 1fr}
-  .bar-label{width:90px;font-size:11px}
-  .actions button{min-width:100%}
+  .card-inner{padding:20px 18px 0}.progress-section{padding:0 18px}
+  .nav{padding:16px 18px 20px}.header h1{font-size:24px}.slide h2{font-size:18px}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}.range-value{font-size:34px}
+  .actions button{min-width:100%}.welcome .big-icon{font-size:48px}
 }
+@keyframes resultsIn{from{opacity:0;transform:translateY(30px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 </style>
 </head>
 <body>
-<div class="wrapper" id="wrapper">
 <div class="container">
+  <div class="header">
+    <h1><span class="grad">📱 Думскролинг</span></h1>
+    <p>Как бесконечная лента влияет на наше общение</p>
+    <div class="badge-row"><span class="badge active" id="countBadge">👥 0 ответов</span></div>
+  </div>
 
-<div class="hero">
-  <h1><span class="grad">Думскролинг</span></h1>
-  <p class="desc">Анонимно — 10 вопросов. После ответа — персональный уровень думскролинга и результаты группы.</p>
+  
+  <div class="card" id="surveyCard">
+    <div class="progress-section">
+      <div class="progress-row">
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <span class="progress-num" id="progressNum">0/7</span>
+      </div>
+    </div>
+    <div class="card-inner">
+      <div id="welcomeScreen">
+        <div class="welcome">
+          <div class="big-icon">🧠</div>
+          <h2 style="font-size:24px;font-weight:700;margin-bottom:6px">Честный разговор о думскролинге</h2>
+          <p class="sub" style="margin-bottom:4px">Анонимно — результаты увидит вся группа</p>
+          <div class="info-items">
+            <div class="ii"><span class="ii-icon">⏱️</span><span class="ii-text"><strong>2 минуты</strong> — 7 вопросов, анонимно</span></div>
+            <div class="ii"><span class="ii-icon">📊</span><span class="ii-text">После ответа увидишь <strong>результаты всей группы</strong></span></div>
+            <div class="ii"><span class="ii-icon">💬</span><span class="ii-text">В конце — вопросы для <strong>обсуждения в группе</strong></span></div>
+          </div>
+          <button class="start-btn" id="startBtn">Начать опрос →</button>
+        </div>
+      </div>
+      <div class="slides-wrap" id="slidesWrap" style="display:none">
+        <form id="surveyForm" onsubmit="return false;">
+        
+        <div class="slide" data-q="q1">
+          <div class="slide-step"><span class="step-dot active">1</span><span class="step-dot">2</span><span class="step-dot">3</span><span class="step-dot">4</span><span class="step-dot">5</span><span class="step-dot">6</span><span class="step-dot">7</span></div>
+          <div class="slide-tag">Личные привычки</div>
+          <h2>Сколько времени в день ты проводишь в соцсетях?</h2>
+          <p class="sub">Честно, данные анонимны</p>
+          <div class="options">
+            <label class="opt"><input type="radio" name="q1" value="0-1"><span class="radio"></span><span class="ico">☕</span><span class="lbl">Менее 1 часа — захожу по делу</span></label>
+            <label class="opt"><input type="radio" name="q1" value="1-3"><span class="radio"></span><span class="ico">📱</span><span class="lbl">1–3 часа — ещё контролирую</span></label>
+            <label class="opt"><input type="radio" name="q1" value="3-5"><span class="radio"></span><span class="ico">😬</span><span class="lbl">3–5 часов — залипаю чаще, чем хотелось бы</span></label>
+            <label class="opt"><input type="radio" name="q1" value="5+"><span class="radio"></span><span class="ico">🔥</span><span class="lbl">Более 5 часов — телефон — часть тела</span></label>
+          </div>
+        </div>
+        
+        <div class="slide" data-q="q2">
+          <div class="slide-step"><span class="step-dot done">✓</span><span class="step-dot active">2</span><span class="step-dot">3</span><span class="step-dot">4</span><span class="step-dot">5</span><span class="step-dot">6</span><span class="step-dot">7</span></div>
+          <div class="slide-tag">Осознанность</div>
+          <h2>Как часто ты ловишь себя на бесцельном скроллинге?</h2>
+          <p class="sub">Открыл «на секунду» — вышел через час?</p>
+          <div class="options">
+            <label class="opt"><input type="radio" name="q2" value="never"><span class="radio"></span><span class="ico">🧘</span><span class="lbl">Почти никогда<span class="subtxt">Я контролирую своё внимание</span></span></label>
+            <label class="opt"><input type="radio" name="q2" value="sometimes"><span class="radio"></span><span class="ico">🤷</span><span class="lbl">Иногда бывает<span class="subtxt">Нo в меру</span></span></label>
+            <label class="opt"><input type="radio" name="q2" value="often"><span class="radio"></span><span class="ico">😰</span><span class="lbl">Часто<span class="subtxt">Залипаю регулярно</span></span></label>
+            <label class="opt"><input type="radio" name="q2" value="constantly"><span class="radio"></span><span class="ico">💀</span><span class="lbl">Постоянно<span class="subtxt">Это уже автоматическая привычка</span></span></label>
+          </div>
+        </div>
+        
+        <div class="slide" data-q="q3">
+          <div class="slide-step"><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot active">3</span><span class="step-dot">4</span><span class="step-dot">5</span><span class="step-dot">6</span><span class="step-dot">7</span></div>
+          <div class="slide-tag">Эмоции</div>
+          <h2>Что ты чувствуешь после скроллинга?</h2>
+          <p class="sub">Полистай ленту 15–20 минут и отрефлексируй</p>
+          <div class="options">
+            <label class="opt"><input type="radio" name="q3" value="better"><span class="radio"></span><span class="ico">😌</span><span class="lbl">Спокойствие<span class="subtxt">Я в курсе, это приятно</span></span></label>
+            <label class="opt"><input type="radio" name="q3" value="nothing"><span class="radio"></span><span class="ico">😐</span><span class="lbl">Ничего особенного<span class="subtxt">Нейтрально</span></span></label>
+            <label class="opt"><input type="radio" name="q3" value="anxious"><span class="radio"></span><span class="ico">😟</span><span class="lbl">Тревогу<span class="subtxt">Мир кажется опасным</span></span></label>
+            <label class="opt"><input type="radio" name="q3" value="depressed"><span class="radio"></span><span class="ico">😞</span><span class="lbl">Подавленность<span class="subtxt">Чувствую усталость и апатию</span></span></label>
+          </div>
+        </div>
+        
+        <div class="slide" data-q="q4">
+          <div class="slide-step"><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot active">4</span><span class="step-dot">5</span><span class="step-dot">6</span><span class="step-dot">7</span></div>
+          <div class="slide-tag">Самооценка</div>
+          <h2>Оцени уровень тревоги за последнюю неделю</h2>
+          <p class="sub">0 — полный дзен, 10 — постоянное напряжение</p>
+          <div class="range-wrap">
+            <input type="range" id="anxietySlider" name="q4" min="0" max="10" value="5">
+            <div class="range-value"><span id="anxietyDisplay">5</span><span class="suf">/10</span></div>
+            <div class="range-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="range-labels"><span>🧘 Спокойствие</span><span>🔥 Сильная тревога</span></div>
+          </div>
+        </div>
+        
+        <div class="slide" data-q="q5">
+          <div class="slide-step"><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot active">5</span><span class="step-dot">6</span><span class="step-dot">7</span></div>
+          <div class="slide-tag">Контроль</div>
+          <h2>Пытался ли ты ограничить время в соцсетях?</h2>
+          <p class="sub">Были ли попытки вырваться из ленты?</p>
+          <div class="options">
+            <label class="opt"><input type="radio" name="q5" value="no"><span class="radio"></span><span class="ico">😎</span><span class="lbl">Нет, меня всё устраивает</span></label>
+            <label class="opt"><input type="radio" name="q5" value="tried"><span class="radio"></span><span class="ico">🥲</span><span class="lbl">Пытался, но сорвался</span></label>
+            <label class="opt"><input type="radio" name="q5" value="yes"><span class="radio"></span><span class="ico">💪</span><span class="lbl">Да, и успешно</span></label>
+          </div>
+        </div>
+        
+        <div class="slide" data-q="q6">
+          <div class="slide-step"><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot active">6</span><span class="step-dot">7</span></div>
+          <div class="slide-tag">Коммуникация</div>
+          <h2>Как думскроллинг влияет на твоё общение с людьми?</h2>
+          <p class="sub">Замечаешь ли ты разницу в реальном разговоре?</p>
+          <div class="options">
+            <label class="opt"><input type="radio" name="q6" value="none"><span class="radio"></span><span class="ico">✅</span><span class="lbl">Не замечаю влияния<span class="subtxt">Я разделяю онлайн и реальность</span></span></label>
+            <label class="opt"><input type="radio" name="q6" value="irritable"><span class="radio"></span><span class="ico">😤</span><span class="lbl">Стал более раздражительным<span class="subtxt">В общении с близкими и коллегами</span></span></label>
+            <label class="opt"><input type="radio" name="q6" value="less"><span class="radio"></span><span class="ico">🏠</span><span class="lbl">Меньше живого общения<span class="subtxt">Заменяю реальные встречи лентой</span></span></label>
+            <label class="opt"><input type="radio" name="q6" value="distracted"><span class="radio"></span><span class="ico">📵</span><span class="lbl">Сложно оторваться от телефона при разговоре<span class="subtxt">Даже когда кто-то рядом</span></span></label>
+          </div>
+        </div>
+        
+        <div class="slide" data-q="q7">
+          <div class="slide-step"><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot active">7</span></div>
+          <div class="slide-tag">Команда</div>
+          <h2>Как часто ты отвлекаешься на телефон во время разговора или пары?</h2>
+          <p class="sub">Честно — это влияет на командную работу</p>
+          <div class="options">
+            <label class="opt"><input type="radio" name="q7" value="never"><span class="radio"></span><span class="ico">🎯</span><span class="lbl">Стараюсь не отвлекаться<span class="subtxt">Телефон на беззвучном</span></span></label>
+            <label class="opt"><input type="radio" name="q7" value="rarely"><span class="radio"></span><span class="ico">👁️</span><span class="lbl">Редко, но бывает<span class="subtxt">Если важное уведомление</span></span></label>
+            <label class="opt"><input type="radio" name="q7" value="often"><span class="radio"></span><span class="ico">😅</span><span class="lbl">Часто проверяю уведомления<span class="subtxt">Даже когда говорят другие</span></span></label>
+            <label class="opt"><input type="radio" name="q7" value="always"><span class="radio"></span><span class="ico">📱</span><span class="lbl">Постоянно — это уже привычка<span class="subtxt">Телефон всегда в руке</span></span></label>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+    <div class="nav" id="navBtns">
+      <button class="btn-prev" id="prevBtn" disabled>← Назад</button>
+      <button class="btn-next" id="nextBtn">Далее →</button>
+    </div>
+  </div>
+
+  
+  <div class="card hidden" id="resultsCard">
+    <div class="card-inner">
+      <div class="profile-box" id="levelBlock">
+        <div class="p-emoji" id="levelEmoji">🧘</div>
+        <div class="p-title" id="levelTitle">Мастер дзена</div>
+        <div class="p-desc" id="levelDesc">Ты не поддаёшься алгоритмам</div>
+        <div class="p-tag" id="levelTag">🧠 Осознанное потребление</div>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi"><div class="num" id="kpiTotal">0</div><div class="lbl">Ответов</div></div>
+        <div class="kpi"><div class="num" id="kpiAnxiety">0.0</div><div class="lbl">Ср. тревога</div></div>
+        <div class="kpi"><div class="num" id="kpiHeavy">0%</div><div class="lbl">Скроллят >3ч</div></div>
+        <div class="kpi"><div class="num" id="kpiDistract">0%</div><div class="lbl">Отвлекаются</div></div>
+      </div>
+      <div class="insight-bar" id="insightBar"></div>
+      <div class="charts-grid" id="chartsContainer"></div>
+      <div class="discuss-box" id="discussBox">
+        <div class="d-title"><span class="d-ico">💬</span> Обсуждение для группы</div>
+        <div id="discussItems"></div>
+      </div>
+      <div class="actions">
+        <button class="btn-share" id="shareBtn">📤 Поделиться</button>
+        <button class="btn-reset" id="resetBtn">🔄 Заново</button>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="card" id="surveyCard">
-  <div class="progress-section">
-    <div class="progress-row">
-      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-      <span class="progress-num" id="progressNum">0/10</span>
-    </div>
-  </div>
-  <div class="card-inner">
-    <div class="slides-wrap" id="slidesWrap">
-      <form id="surveyForm" onsubmit="return false;">
-      <div class="slide" data-q="q1">
-        <div class="slide-step"><span class="step-dot active">1</span><span class="step-dot">2</span><span class="step-dot">3</span><span class="step-dot">4</span><span class="step-dot">5</span><span class="step-dot">6</span><span class="step-dot">7</span><span class="step-dot">8</span><span class="step-dot">9</span><span class="step-dot">10</span></div>
-        <div class="slide-tag">Личные привычки</div>
-        <h2>Сколько времени в день ты проводишь в соцсетях?</h2>
-        <p class="sub">Честно, данные анонимны</p>
-        <div class="options">
-          <label class="opt"><input type="radio" name="q1" value="0-1"><span class="radio"></span><span class="ico">☕</span><span class="lbl">Менее 1 часа — захожу по делу</span></label>
-          <label class="opt"><input type="radio" name="q1" value="1-3"><span class="radio"></span><span class="ico">📱</span><span class="lbl">1–3 часа — ещё контролирую</span></label>
-          <label class="opt"><input type="radio" name="q1" value="3-5"><span class="radio"></span><span class="ico">😬</span><span class="lbl">3–5 часов — залипаю чаще, чем хотелось бы</span></label>
-          <label class="opt"><input type="radio" name="q1" value="5+"><span class="radio"></span><span class="ico">🔥</span><span class="lbl">Более 5 часов — телефон — часть тела</span></label>
-        </div>
-      </div>
-      <div class="slide" data-q="q2">
-        <div class="slide-step"><span class="step-dot done">✓</span><span class="step-dot active">2</span><span class="step-dot">3</span><span class="step-dot">4</span><span class="step-dot">5</span><span class="step-dot">6</span><span class="step-dot">7</span><span class="step-dot">8</span><span class="step-dot">9</span><span class="step-dot">10</span></div>
-        <div class="slide-tag">Осознанность</div>
-        <h2>Как часто ты ловишь себя на бесцельном скроллинге?</h2>
-        <p class="sub">Открыл «на секунду» — вышел через час?</p>
-        <div class="options">
-          <label class="opt"><input type="radio" name="q2" value="never"><span class="radio"></span><span class="ico">🧘</span><span class="lbl">Почти никогда<span class="subtxt">Я контролирую своё внимание</span></span></label>
-          <label class="opt"><input type="radio" name="q2" value="sometimes"><span class="radio"></span><span class="ico">🤷</span><span class="lbl">Иногда бывает<span class="subtxt">Но в меру</span></span></label>
-          <label class="opt"><input type="radio" name="q2" value="often"><span class="radio"></span><span class="ico">😰</span><span class="lbl">Часто<span class="subtxt">Залипаю регулярно</span></span></label>
-          <label class="opt"><input type="radio" name="q2" value="constantly"><span class="radio"></span><span class="ico">💀</span><span class="lbl">Постоянно<span class="subtxt">Это уже автоматическая привычка</span></span></label>
-        </div>
-      </div>
-      <div class="slide" data-q="q3">
-        <div class="slide-step"><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot active">3</span><span class="step-dot">4</span><span class="step-dot">5</span><span class="step-dot">6</span><span class="step-dot">7</span><span class="step-dot">8</span><span class="step-dot">9</span><span class="step-dot">10</span></div>
-        <div class="slide-tag">Эмоции</div>
-        <h2>Что ты чувствуешь после скроллинга?</h2>
-        <p class="sub">Полистай ленту 15–20 минут и отрефлексируй</p>
-        <div class="options">
-          <label class="opt"><input type="radio" name="q3" value="better"><span class="radio"></span><span class="ico">😌</span><span class="lbl">Спокойствие<span class="subtxt">Я в курсе, это приятно</span></span></label>
-          <label class="opt"><input type="radio" name="q3" value="nothing"><span class="radio"></span><span class="ico">😐</span><span class="lbl">Ничего особенного<span class="subtxt">Нейтрально</span></span></label>
-          <label class="opt"><input type="radio" name="q3" value="anxious"><span class="radio"></span><span class="ico">😟</span><span class="lbl">Тревогу<span class="subtxt">Мир кажется опасным</span></span></label>
-          <label class="opt"><input type="radio" name="q3" value="depressed"><span class="radio"></span><span class="ico">😞</span><span class="lbl">Подавленность<span class="subtxt">Чувствую усталость и апатию</span></span></label>
-        </div>
-      </div>
-      <div class="slide" data-q="q4">
-        <div class="slide-step"><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot active">4</span><span class="step-dot">5</span><span class="step-dot">6</span><span class="step-dot">7</span><span class="step-dot">8</span><span class="step-dot">9</span><span class="step-dot">10</span></div>
-        <div class="slide-tag">Самооценка</div>
-        <h2>Оцени уровень тревоги за последнюю неделю</h2>
-        <p class="sub">0 — полный дзен, 10 — постоянное напряжение</p>
-        <div class="range-wrap">
-          <input type="range" id="anxietySlider" name="q4" min="0" max="10" value="5">
-          <div class="range-value"><span id="anxietyDisplay">5</span><span class="suf">/10</span></div>
-          <div class="range-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-          <div class="range-labels"><span>🧘 Спокойствие</span><span>🔥 Сильная тревога</span></div>
-        </div>
-      </div>
-      <div class="slide" data-q="q5">
-        <div class="slide-step"><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot active">5</span><span class="step-dot">6</span><span class="step-dot">7</span><span class="step-dot">8</span><span class="step-dot">9</span><span class="step-dot">10</span></div>
-        <div class="slide-tag">Контроль</div>
-        <h2>Пытался ли ты ограничить время в соцсетях?</h2>
-        <p class="sub">Были ли попытки вырваться из ленты?</p>
-        <div class="options">
-          <label class="opt"><input type="radio" name="q5" value="no"><span class="radio"></span><span class="ico">😎</span><span class="lbl">Нет, меня всё устраивает</span></label>
-          <label class="opt"><input type="radio" name="q5" value="tried"><span class="radio"></span><span class="ico">🥲</span><span class="lbl">Пытался, но сорвался</span></label>
-          <label class="opt"><input type="radio" name="q5" value="yes"><span class="radio"></span><span class="ico">💪</span><span class="lbl">Да, и успешно</span></label>
-        </div>
-      </div>
-      <div class="slide" data-q="q6">
-        <div class="slide-step"><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot active">6</span><span class="step-dot">7</span><span class="step-dot">8</span><span class="step-dot">9</span><span class="step-dot">10</span></div>
-        <div class="slide-tag">Коммуникация</div>
-        <h2>Как думскролинг влияет на твоё общение с людьми?</h2>
-        <p class="sub">Замечаешь ли ты разницу в реальном разговоре?</p>
-        <div class="options">
-          <label class="opt"><input type="radio" name="q6" value="none"><span class="radio"></span><span class="ico">✅</span><span class="lbl">Не замечаю влияния<span class="subtxt">Я разделяю онлайн и реальность</span></span></label>
-          <label class="opt"><input type="radio" name="q6" value="irritable"><span class="radio"></span><span class="ico">😤</span><span class="lbl">Стал более раздражительным<span class="subtxt">В общении с близкими и коллегами</span></span></label>
-          <label class="opt"><input type="radio" name="q6" value="less"><span class="radio"></span><span class="ico">🏠</span><span class="lbl">Меньше живого общения<span class="subtxt">Заменяю реальные встречи лентой</span></span></label>
-          <label class="opt"><input type="radio" name="q6" value="distracted"><span class="radio"></span><span class="ico">📵</span><span class="lbl">Сложно оторваться от телефона при разговоре<span class="subtxt">Даже когда кто-то рядом</span></span></label>
-        </div>
-      </div>
-      <div class="slide" data-q="q7">
-        <div class="slide-step"><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot active">7</span><span class="step-dot">8</span><span class="step-dot">9</span><span class="step-dot">10</span></div>
-        <div class="slide-tag">Команда</div>
-        <h2>Как часто ты отвлекаешься на телефон во время разговора или пары?</h2>
-        <p class="sub">Честно — это влияет на командную работу</p>
-        <div class="options">
-          <label class="opt"><input type="radio" name="q7" value="never"><span class="radio"></span><span class="ico">🎯</span><span class="lbl">Стараюсь не отвлекаться<span class="subtxt">Телефон на беззвучном</span></span></label>
-          <label class="opt"><input type="radio" name="q7" value="rarely"><span class="radio"></span><span class="ico">👁️</span><span class="lbl">Редко, но бывает<span class="subtxt">Если важное уведомление</span></span></label>
-          <label class="opt"><input type="radio" name="q7" value="often"><span class="radio"></span><span class="ico">😅</span><span class="lbl">Часто проверяю уведомления<span class="subtxt">Даже когда говорят другие</span></span></label>
-          <label class="opt"><input type="radio" name="q7" value="always"><span class="radio"></span><span class="ico">📱</span><span class="lbl">Постоянно — это уже привычка<span class="subtxt">Телефон всегда в руке</span></span></label>
-        </div>
-      </div>
-      <div class="slide" data-q="q8">
-        <div class="slide-step"><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot active">8</span><span class="step-dot">9</span><span class="step-dot">10</span></div>
-        <div class="slide-tag">Сон</div>
-        <h2>Влияет ли скроллинг на твой сон?</h2>
-        <p class="sub">Листаешь ленту перед сном или ночью?</p>
-        <div class="options">
-          <label class="opt"><input type="radio" name="q8" value="no"><span class="radio"></span><span class="ico">😴</span><span class="lbl">Нет, сон не страдает</span></label>
-          <label class="opt"><input type="radio" name="q8" value="sometimes"><span class="radio"></span><span class="ico">😬</span><span class="lbl">Бывает — засыпаю позже из-за телефона</span></label>
-          <label class="opt"><input type="radio" name="q8" value="yes"><span class="radio"></span><span class="ico">🤡</span><span class="lbl">Да, я регулярно не высыпаюсь</span></label>
-        </div>
-      </div>
-      <div class="slide" data-q="q9">
-        <div class="slide-step"><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot active">9</span><span class="step-dot">10</span></div>
-        <div class="slide-tag">Продуктивность</div>
-        <h2>Влияет ли думскролинг на твою продуктивность?</h2>
-        <p class="sub">Как часто ты отвлекаешься на ленту во время работы или учёбы?</p>
-        <div class="options">
-          <label class="opt"><input type="radio" name="q9" value="no"><span class="radio"></span><span class="ico">💪</span><span class="lbl">Нет, я умею фокусироваться</span></label>
-          <label class="opt"><input type="radio" name="q9" value="slightly"><span class="radio"></span><span class="ico">😕</span><span class="lbl">Немного — иногда залипаю</span></label>
-          <label class="opt"><input type="radio" name="q9" value="yes"><span class="radio"></span><span class="ico">💀</span><span class="lbl">Да, мне сложно работать без проверки ленты</span></label>
-        </div>
-      </div>
-      <div class="slide" data-q="q10">
-        <div class="slide-step"><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot done">✓</span><span class="step-dot active">10</span></div>
-        <div class="slide-tag">Осознанность</div>
-        <h2>Готов ли ты изменить привычку скроллинга?</h2>
-        <p class="sub">Честно — есть ли желание что-то менять?</p>
-        <div class="options">
-          <label class="opt"><input type="radio" name="q10" value="no"><span class="radio"></span><span class="ico">😎</span><span class="lbl">Нет, меня всё устраивает</span></label>
-          <label class="opt"><input type="radio" name="q10" value="think"><span class="radio"></span><span class="ico">🤔</span><span class="lbl">Думаю об этом, но ничего не делаю</span></label>
-          <label class="opt"><input type="radio" name="q10" value="yes"><span class="radio"></span><span class="ico">🔥</span><span class="lbl">Да, я уже меняю привычки</span></label>
-        </div>
-      </div>
-      </form>
-    </div>
-  </div>
-  <div class="nav" id="navBtns">
-    <button class="btn-prev" id="prevBtn" disabled>←</button>
-    <button class="btn-next" id="nextBtn">Далее →</button>
+
+<div class="modal-overlay" id="qrModal">
+  <div class="modal-box">
+    <h3>📤 Поделиться опросом</h3>
+    <p class="sub">Отсканируй QR или отправь ссылку</p>
+    <div class="qr-img" id="qrContainer"><span style="color:var(--text2);font-size:14px">⏳ Загрузка...</span></div>
+    <div class="qr-url" id="pageUrl"></div>
+    <button class="close-btn" id="closeModal">Готово</button>
   </div>
 </div>
 
-<div class="hidden" id="resultsWrap">
-  <div class="results" id="resultsContent">
-    <div class="doomscore" id="doomscoreBox">
-      <div class="ds-lbl">🔥 Твой уровень думскролинга</div>
-      <div class="ds-score" id="doomscoreDisplay">0/50</div>
-      <div class="ds-desc" id="doomscoreDesc">—</div>
-      <div class="ds-tip" id="doomscoreTip"></div>
-    </div>
-    <div class="profile-grid" id="profileGrid"></div>
-    <div class="kpi-grid">
-      <div class="kpi"><div class="k-num" id="kpiTotal">0</div><div class="k-lbl">Всего ответов</div></div>
-      <div class="kpi"><div class="k-num" id="kpiAnxiety">0.0</div><div class="k-lbl">Ср. тревога</div></div>
-      <div class="kpi"><div class="k-num" id="kpiHeavy">0</div><div class="k-lbl">Скроллят >3ч</div></div>
-      <div class="kpi"><div class="k-num" id="kpiDistract">0</div><div class="k-lbl">Отвлекаются</div></div>
-    </div>
-    <div class="insight" id="insightBar"></div>
-    <div class="charts" id="chartsContainer"></div>
-    <div class="actions">
-      <button class="btn-reset" id="resetBtn">🔄 Заново</button>
-    </div>
-  </div>
-</div>
-</div>
-</div>
+<canvas id="confetti"></canvas>
 
 <script>
 (function(){
-const KEY='ds_v3';
+const KEY='doomscroll_v4';
 const C=['#e94560','#ff6b81','#ff9f43','#54a0ff','#5f27cd','#1dd1a1','#00d2d3','#f368e0'];
-function gD(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch{return[]}}
-function sD(d){try{localStorage.setItem(KEY,JSON.stringify(d))}catch(e){alert('Не удалось сохранить.')}}
-function cD(){try{localStorage.removeItem(KEY)}catch{}}
 
-function calcDS(me){
-  if(!me)return{score:0,desc:'Нет данных',tip:''};
+function getData(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch{return[]}}
+function saveData(d){try{localStorage.setItem(KEY,JSON.stringify(d))}catch(e){alert('⚠️ Не удалось сохранить ответ. Освободите место в localStorage.')}}
+function clearData(){try{localStorage.removeItem(KEY)}catch{}}
+
+
+function calcLevel(a){
   let s=0;
-  if(me.q1==='0-1')s+=0;else if(me.q1==='1-3')s+=2;else if(me.q1==='3-5')s+=4;else if(me.q1==='5+')s+=6;
-  if(me.q2==='never')s+=0;else if(me.q2==='sometimes')s+=2;else if(me.q2==='often')s+=4;else if(me.q2==='constantly')s+=6;
-  if(me.q3==='better')s+=0;else if(me.q3==='nothing')s+=1;else if(me.q3==='anxious')s+=4;else if(me.q3==='depressed')s+=5;
-  s+=(me.anxiety||5)*.6;
-  if(me.q5==='no')s+=3;else if(me.q5==='tried')s+=2;else if(me.q5==='yes')s+=0;
-  if(me.q6==='none')s+=0;else if(me.q6==='irritable')s+=3;else if(me.q6==='less')s+=4;else if(me.q6==='distracted')s+=5;
-  if(me.q7==='never')s+=0;else if(me.q7==='rarely')s+=2;else if(me.q7==='often')s+=4;else if(me.q7==='always')s+=6;
-  if(me.q8==='no')s+=0;else if(me.q8==='sometimes')s+=2;else if(me.q8==='yes')s+=5;
-  if(me.q9==='no')s+=0;else if(me.q9==='slightly')s+=2;else if(me.q9==='yes')s+=5;
-  if(me.q10==='no')s+=3;else if(me.q10==='think')s+=1;else if(me.q10==='yes')s+=0;
-  s=Math.min(50,Math.max(0,Math.round(s)));
-  let desc,tip;
-  if(s<=10){desc='Низкий уровень';tip='Ты отлично контролируешь внимание! Поделись опытом с друзьями.'}
-  else if(s<=20){desc='Лёгкий уровень';tip='Иногда залипаешь, но контролируешь ситуацию. Следи за качеством отдыха.'}
-  else if(s<=30){desc='Средний уровень';tip='Думскролинг уже отнимает время. Попробуй таймеры и детокс перед сном.'}
-  else if(s<=40){desc='Высокий уровень';tip='Телефон сильно влияет на состояние. Отключи уведомления, ограничь соцсети до 2ч.'}
-  else{desc='Критический уровень';tip='Срочно нужен цифровой детокс! 30 мин без телефона перед сном, постепенно сокращай время.'}
-  return{score:s,desc,tip};
+  const m={'0-1':1,'1-3':2,'3-5':3,'5+':4};
+  s+=m[a.q1]||2;
+  const f={'never':1,'sometimes':2,'often':3,'constantly':4};
+  s+=f[a.q2]||2;
+  const e={'better':1,'nothing':2,'anxious':3,'depressed':4};
+  s+=e[a.q3]||2;
+  s+=Math.round((a.anxiety||5)/3.3);
+  if(a.q5==='yes')s-=2;
+  if(a.q6==='irritable'||a.q6==='distracted')s+=1;
+  if(a.q7==='always'||a.q7==='often')s+=1;
+  if(s<=5)return {e:'🧘',t:'Мастер дзена',d:'Ты контролируешь телефон, а не он тебя.',g:'Осознанное потребление'};
+  if(s<=8)return {e:'😌',t:'Осознанный пользователь',d:'Лента пробует затянуть, но ты держишься.',g:'Зона комфорта'};
+  if(s<=12)return {e:'😬',t:'В зоне риска',d:'Алгоритмы уже влияют на привычки.',g:'Требуется внимание'};
+  if(s<=16)return {e:'⚠️',t:'Думскроллер',d:'Мозг просит передышки.',g:'Пора действовать'};
+  return {e:'🚨',t:'Зависимый',d:'Критический уровень — нужен цифровой детокс.',g:'Срочная помощь'};
 }
 
-function calcProf(all){
-  let n=all.length;if(!n)return[];
-  let h=all.filter(r=>r.q1==='3-5'||r.q1==='5+').length;
-  let ax=all.reduce((s,r)=>s+(r.anxiety||0),0)/n;
-  let nc=all.filter(r=>r.q3==='anxious'||r.q3==='depressed').length;
-  let dr=all.filter(r=>r.q7==='often'||r.q7==='always').length;
-  let sl=all.filter(r=>r.q8==='yes'||r.q8==='sometimes').length;
-  let pr=all.filter(r=>r.q9==='yes'||r.q9==='slightly').length;
-  let cw=all.filter(r=>r.q10==='think'||r.q10==='yes').length;
-  return[
-    {ico:'📱',val:Math.round(h/n*100)+'%',lbl:'Скроллят >3ч'},
-    {ico:'😰',val:ax.toFixed(1),lbl:'Ср. тревога /10'},
-    {ico:'😟',val:Math.round(nc/n*100)+'%',lbl:'Тревога после'},
-    {ico:'🌙',val:Math.round(sl/n*100)+'%',lbl:'Сон страдает'},
-    {ico:'💼',val:Math.round(pr/n*100)+'%',lbl:'Продуктивность ↓'},
-    {ico:'🔄',val:Math.round(cw/n*100)+'%',lbl:'Хотят менять'},
-  ];
-}
 
-function rCharts(all){
-  const cc=$('chartsContainer');cc.innerHTML='';
-  const defs=[
-    {t:'Время в соцсетях',k:'q1',lv:['0-1','1-3','3-5','5+'],ln:['<1ч','1–3ч','3–5ч','>5ч']},
-    {t:'Частота скроллинга',k:'q2',lv:['never','sometimes','often','constantly'],ln:['Никогда','Иногда','Часто','Постоянно']},
-    {t:'Эмоции после',k:'q3',lv:['better','nothing','anxious','depressed'],ln:['Спокойствие','Нейтрально','Тревога','Подавленность']},
-    {t:'Влияние на общение',k:'q6',lv:['none','irritable','less','distracted'],ln:['Не влияет','Раздражение','Меньше общения','Не оторваться']},
-    {t:'Отвлечение на парах',k:'q7',lv:['never','rarely','often','always'],ln:['Не отвлекаюсь','Редко','Часто','Постоянно']},
-    {t:'Влияние на сон',k:'q8',lv:['no','sometimes','yes'],ln:['Не страдает','Бывает','Не высыпаюсь']},
-    {t:'Продуктивность',k:'q9',lv:['no','slightly','yes'],ln:['Фокус','Немного↓','Сильно↓']},
-    {t:'Готовность менять',k:'q10',lv:['no','think','yes'],ln:['Нет','Думаю','Уже меняю']},
-  ];
-  defs.forEach(function(d,idx){
-    let cnt={},tl=0;
-    d.lv.forEach(function(v){cnt[v]=0});
-    all.forEach(function(r){let v=r[d.k];if(v&&cnt.hasOwnProperty(v)){cnt[v]++;tl++}});
-    let box=document.createElement('div');box.className='chart-box';
-    let html='<h3>'+d.t+' <span class="n">('+tl+')</span></h3>';
-    d.lv.forEach(function(v,i){
-      let pct=tl?Math.round(cnt[v]/tl*100):0;
-      let clr=C[i%C.length];
-      html+='<div class="bar-row"><span class="bar-label">'+d.ln[i]+'</span><div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:'+clr+'"><span class="bar-val">'+cnt[v]+'</span></div></div><span class="bar-count">'+cnt[v]+'</span></div>';
-    });
-    box.innerHTML=html;cc.appendChild(box);
-  });
-}
+const ws=document.getElementById('welcomeScreen');
+const sw=document.getElementById('slidesWrap');
+const slides=document.querySelectorAll('.slide');
+const pf=document.getElementById('progressFill');
+const pn=document.getElementById('progressNum');
+const prev=document.getElementById('prevBtn');
+const next=document.getElementById('nextBtn');
+const surveyCard=document.getElementById('surveyCard');
+const resultsCard=document.getElementById('resultsCard');
+const T=7; 
+let cur=0;
 
-function $(id){return document.getElementById(id)}
-const D={};
-['welcome','slidesWrap','surveyForm','progressFill','progressNum','prevBtn','nextBtn','surveyCard','wrapper','resultsWrap','anxietySlider','anxietyDisplay','profileGrid','kpiTotal','kpiAnxiety','kpiHeavy','kpiDistract','insightBar','chartsContainer','resetBtn','doomscoreDisplay','doomscoreDesc','doomscoreTip'].forEach(function(id){D[id]=$(id)});
 
-const T=10;let cur=0;
+document.getElementById('startBtn').onclick=function(){
+  ws.style.display='none';
+  sw.style.display='block';
+  go(0);
+};
 
 function go(i){
-  document.querySelectorAll('.slide').forEach(function(s,j){s.classList.toggle('active',j===i)});
-  cur=i;D.progressFill.style.width=((i+1)/T*100)+'%';D.progressNum.textContent=(i+1)+'/'+T;
-  D.prevBtn.disabled=i===0;D.nextBtn.textContent=i===T-1?'📨 Отправить':'Далее →';
-  document.querySelectorAll('.slide').forEach(function(sl,idx){
-    let d=sl.querySelectorAll('.step-dot');
-    d.forEach(function(dt,di){dt.className='step-dot';if(di<idx)dt.classList.add('done');else if(di===idx)dt.classList.add('active')});
+  slides.forEach((s,j)=>s.classList.toggle('active',j===i));
+  cur=i;
+  pf.style.width=((i+1)/T*100)+'%';
+  pn.textContent=(i+1)+'/'+T;
+  prev.disabled=i===0;
+  next.textContent=i===T-1?'📨 Отправить':'Далее →';
+  
+  slides.forEach((sl,idx)=>{
+    const dots=sl.querySelectorAll('.step-dot');
+    dots.forEach((d,di)=>{
+      d.className='step-dot';
+      if(di<i)d.classList.add('done');
+      else if(di===i)d.classList.add('active');
+    });
   });
-  let sub=document.querySelectorAll('.slide')[i].querySelector('.sub');sub.classList.remove('err');
+  
+  const sub=slides[i].querySelector('.sub');
+  sub.classList.remove('err');
   if(sub.dataset.orig){sub.textContent=sub.dataset.orig;delete sub.dataset.orig}
-  document.querySelectorAll('.slide')[i].querySelector('input[type=range]')&&setTimeout(function(){document.querySelector('.slide.active input[type=range]')&&document.querySelector('.slide.active input[type=range]').focus()},300);
 }
+
 
 document.querySelectorAll('.opt').forEach(function(el){
   el.addEventListener('click',function(){
-    let inp=this.querySelector('input[type=radio]');if(!inp)return;
-    let nm=inp.getAttribute('name');
+    const inp=this.querySelector('input[type=radio]');
+    if(!inp)return;
+    const nm=inp.getAttribute('name');
     document.querySelectorAll('.opt input[name="'+nm+'"]').forEach(function(r){r.closest('.opt').classList.remove('selected')});
-    this.classList.add('selected');inp.checked=true;
+    this.classList.add('selected');
+    inp.checked=true;
   });
 });
 
-D.prevBtn.onclick=function(){if(cur>0)go(cur-1)};
-D.nextBtn.onclick=function(){
+
+prev.onclick=function(){if(cur>0)go(cur-1)};
+
+next.onclick=function(){
   if(cur<T-1){
-    let sl=document.querySelectorAll('.slide')[cur];
-    let inps=sl.querySelectorAll('input[type=radio]');let range=sl.querySelector('input[type=range]');let ans=false;
-    inps.forEach(function(i){if(i.checked)ans=true});if(range)ans=true;
+    const sl=slides[cur];
+    const inps=sl.querySelectorAll('input[type=radio]');
+    let ans=false;
+    inps.forEach(function(i){if(i.checked)ans=true});
     if(inps.length>0&&!ans){
-      let sub=sl.querySelector('.sub');if(!sub.dataset.orig)sub.dataset.orig=sub.textContent;
-      sub.textContent='Выбери вариант';sub.classList.add('err');return;
+      const sub=sl.querySelector('.sub');
+      if(!sub.dataset.orig)sub.dataset.orig=sub.textContent;
+      sub.textContent='⚠️ Выберите один вариант';
+      sub.classList.add('err');
+      return;
     }
     go(cur+1);
-  }else{sub()}
+  }else{
+    submitSurvey();
+  }
 };
-D.anxietySlider.oninput=function(){D.anxietyDisplay.textContent=this.value};
 
-function sub(){
-  let fd=new FormData(D.surveyForm);let ans={};
-  ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10'].forEach(function(k){
-    let v=fd.get(k);if(k==='q4')ans.anxiety=parseInt(v,10);else if(v)ans[k]=v;
+
+document.getElementById('anxietySlider').oninput=function(){
+  document.getElementById('anxietyDisplay').textContent=this.value;
+};
+
+
+function submitSurvey(){
+  const fd=new FormData(document.getElementById('surveyForm'));
+  const q1=fd.get('q1'),q2=fd.get('q2'),q3=fd.get('q3'),q5=fd.get('q5'),q6=fd.get('q6'),q7=fd.get('q7');
+  const q4=fd.get('q4');
+  const anxiety=parseInt(q4,10);
+  if(!q1||!q2||!q3||!q5||!q6||!q7){alert('Ответь на все вопросы');return}
+  const d=getData();
+  d.push({q1,q2,q3,q5,q6,q7,anxiety,ts:Date.now()});
+  saveData(d);
+  surveyCard.classList.add('hidden');
+  resultsCard.classList.remove('hidden');
+  resultsCard.classList.add('results-enter');
+  renderResults();
+  launchConfetti();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+
+function renderResults(){
+  const data=getData();
+  if(!data.length)return;
+  const me=data[data.length-1];
+  const lv=calcLevel(me);
+  document.getElementById('levelEmoji').textContent=lv.e;
+  document.getElementById('levelTitle').textContent=lv.t;
+  document.getElementById('levelDesc').textContent=lv.d;
+  document.getElementById('levelTag').textContent='🧠 '+lv.g;
+  document.getElementById('countBadge').textContent='👥 '+data.length+' ответов';
+
+  const n=data.length;
+  const avgAnx=data.reduce(function(s,r){return s+(r.anxiety||0)},0)/n;
+  document.getElementById('kpiTotal').textContent=n;
+  document.getElementById('kpiAnxiety').textContent=avgAnx.toFixed(1);
+  const heavy=data.filter(function(r){return r.q1==='3-5'||r.q1==='5+'}).length;
+  document.getElementById('kpiHeavy').textContent=Math.round(heavy/n*100)+'%';
+  const distr=data.filter(function(r){return r.q7==='often'||r.q7==='always'}).length;
+  document.getElementById('kpiDistract').textContent=Math.round(distr/n*100)+'%';
+
+  
+  const anxC=data.filter(function(r){return r.q3==='anxious'||r.q3==='depressed'}).length;
+  const ap=Math.round(anxC/n*100);
+  const ib=document.getElementById('insightBar');
+  let txt;
+  if(ap>50||avgAnx>6)txt='⚠️ <strong>'+ap+'%</strong> группы чувствует тревогу или подавленность после скроллинга. Средняя тревога — <strong>'+avgAnx.toFixed(1)+'/10</strong>.';
+  else if(ap>30)txt='📊 <strong>'+ap+'%</strong> группы испытывает дискомфорт после скроллинга. Средняя тревога — <strong>'+avgAnx.toFixed(1)+'/10</strong>.';
+  else txt='✅ В этой группе только <strong>'+ap+'%</strong> чувствует тревогу. Средняя тревога — <strong>'+avgAnx.toFixed(1)+'/10</strong>.';
+  ib.innerHTML=txt;
+
+  
+  const chartsContainer=document.getElementById('chartsContainer');
+  chartsContainer.innerHTML='';
+  const defs=[
+    {t:'Время в соцсетях',k:'q1',l:['0-1','1-3','3-5','5+'],n:['<1ч','1–3ч','3–5ч','>5ч']},
+    {t:'Частота думскроллинга',k:'q2',l:['never','sometimes','often','constantly'],n:['Никогда','Иногда','Часто','Постоянно']},
+    {t:'Эмоции после',k:'q3',l:['better','nothing','anxious','depressed'],n:['Спокойствие','Нейтрально','Тревога','Подавленность']},
+    {t:'Влияние на общение',k:'q6',l:['none','irritable','less','distracted'],n:['Не влияет','Раздражение','Меньше общения','Не оторваться']},
+    {t:'Отвлечение на парах/разговоре',k:'q7',l:['never','rarely','often','always'],n:['Не отвлекаюсь','Редко','Часто','Постоянно']},
+  ];
+  defs.forEach(function(d,i){
+    var cnt={},tl=0;
+    d.l.forEach(function(l){cnt[l]=0});
+    data.forEach(function(r){
+      var v=r[d.k];
+      if(v!==undefined&&v!==null&&cnt.hasOwnProperty(v)){cnt[v]++;tl++}
+    });
+    if(tl===0){tl=1;};
+    var sec=document.createElement('div');sec.className='chart-box';
+    var h='<h3>'+d.t+' <span class="n">('+tl+' ответов)</span></h3><div class="chart-row"><div class="chart-canvas-wrap"><canvas id="ch'+i+'"></canvas></div><div class="chart-labels">';
+    d.l.forEach(function(l,j){
+      var p=Math.round(cnt[l]/tl*100);
+      var cl=C[j%C.length];
+      h+='<div class="cl-item"><span class="cl-dot" style="background:'+cl+'"></span><span class="cl-name">'+d.n[j]+'</span><div class="cl-bar-wrap"><div class="cl-bar-fill" style="width:'+p+'%;background:'+cl+'"></div></div><span class="cl-pct">'+p+'%</span></div>';
+    });
+    h+='</div></div></div>';
+    sec.innerHTML=h;
+    chartsContainer.appendChild(sec);
+    setTimeout(function(){drawPie('ch'+i,d.l.map(function(l){return cnt[l]}),d.n)},150);
   });
-  if(!ans.q1||!ans.q2||!ans.q3||!ans.q5||!ans.q6||!ans.q7||!ans.q8||!ans.q9||!ans.q10){alert('Ответь на все вопросы');return}
-  let d=gD();d.push(ans);sD(d);
-  D.surveyCard.classList.add('hidden');D.resultsWrap.classList.remove('hidden');D.wrapper.classList.add('survey-done');
-  D.resultsContent.style.animation='resIn .6s ease';
-  rR();window.scrollTo({top:0,behavior:'smooth'});
+
+  
+  var dc=document.getElementById('discussItems');
+  var prompts=[];
+  if(ap>40||avgAnx>5)prompts.push('Большая часть группы испытывает тревогу после скроллинга. Как это влияет на атмосферу?');
+  if(heavy/n>0.4)prompts.push('Многие проводят в соцсетях 3+ часа. Какие правила работы с телефоном можно ввести?');
+  if(distr/n>0.3)prompts.push('Некоторым сложно оторваться от телефона при разговоре. Как это мешает командной работе?');
+  var irr=data.filter(function(r){return r.q6==='irritable'||r.q6==='distracted'}).length;
+  if(irr/n>0.3)prompts.push('Думскроллинг влияет на качество общения. Что можно предложить вместо скроллинга в перерывах?');
+  prompts.push('Что каждый может сделать, чтобы снизить влияние телефона на общение в группе?');
+  dc.innerHTML=prompts.map(function(p,i){return '<div class="d-item"><span class="d-num">'+(i+1)+'</span><span class="d-text">'+p+'</span></div>'}).join('');
 }
 
-function rR(){
-  let all=gD();if(!all.length)return;
-  let me=all[all.length-1];let ds=calcDS(me);
-  let sc={low:'#1dd1a1',mild:'#54a0ff',moderate:'#ff9f43',high:'#e94560',critical:'#e94560'};
-  let lvl=ds.score<=10?'low':ds.score<=20?'mild':ds.score<=30?'moderate':ds.score<=40?'high':'critical';
-  D.doomscoreDisplay.textContent=ds.score+'/50';
-  D.doomscoreDisplay.style.background='linear-gradient(135deg,'+sc[lvl]+','+(lvl==='critical'||lvl==='high'?'#ff6b81':lvl==='moderate'?'#ff9f43':lvl==='mild'?'#54a0ff':'#1dd1a1')+')';
-  D.doomscoreDisplay.style.webkitBackgroundClip='text';D.doomscoreDisplay.style.webkitTextFillColor='transparent';D.doomscoreDisplay.style.backgroundClip='text';
-  D.doomscoreDesc.textContent=ds.desc;D.doomscoreTip.textContent=ds.tip;
-  let prof=calcProf(all);D.profileGrid.innerHTML='';
-  prof.forEach(function(p){D.profileGrid.innerHTML+='<div class="profile-item"><span class="pi-ico">'+p.ico+'</span><span class="pi-val">'+p.val+'</span><span class="pi-lbl">'+p.lbl+'</span></div>'});
-  let n=all.length;
-  let ax=all.reduce(function(s,r){return s+(r.anxiety||0)},0)/n;
-  let h=all.filter(function(r){return r.q1==='3-5'||r.q1==='5+'}).length;
-  let dr=all.filter(function(r){return r.q7==='often'||r.q7==='always'}).length;
-  D.kpiTotal.textContent=n;D.kpiAnxiety.textContent=ax.toFixed(1);D.kpiHeavy.textContent=h;D.kpiDistract.textContent=dr;
-  let nc=all.filter(function(r){return r.q3==='anxious'||r.q3==='depressed'}).length;
-  let ap=Math.round(nc/n*100);
-  D.insightBar.innerHTML=ap>50||ax>6?'⚠️ <strong>'+ap+'%</strong> группы чувствует тревогу. Средняя — <strong>'+ax.toFixed(1)+'/10</strong>.':ap>30?'📊 <strong>'+ap+'%</strong> испытывает дискомфорт. Средняя — <strong>'+ax.toFixed(1)+'/10</strong>.':'✅ <strong>'+ap+'%</strong> чувствует тревогу. Средняя — <strong>'+ax.toFixed(1)+'/10</strong>.';
-  rCharts(all);
+
+function drawPie(id,vals){
+  var c=document.getElementById(id);
+  if(!c)return;
+  var sz=100,dpr=window.devicePixelRatio||1;
+  c.width=sz*dpr;c.height=sz*dpr;
+  c.style.width=sz+'px';c.style.height=sz+'px';
+  var ctx=c.getContext('2d');
+  ctx.scale(dpr,dpr);
+  var cx=sz/2,cy=sz/2,r=sz/2-6;
+  var tl=0;vals.forEach(function(v){tl+=v});
+  if(tl===0){
+    ctx.fillStyle='#2a2a50';
+    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fill();
+    return;
+  }
+  var sa=-Math.PI/2;
+  vals.forEach(function(v,i){
+    if(v===0)return;
+    var a=(v/tl)*Math.PI*2;
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,sa,sa+a);ctx.closePath();
+    ctx.fillStyle=C[i%C.length];ctx.fill();
+    sa+=a;
+  });
+  ctx.beginPath();ctx.arc(cx,cy,r*0.5,0,Math.PI*2);ctx.fillStyle='#13132b';ctx.fill();
 }
 
-D.resetBtn.onclick=function(){if(confirm('Очистить все ответы?')){cD();location.reload()}};
 
-go(0);
+function launchConfetti(){
+  var c=document.getElementById('confetti');
+  var ctx=c.getContext('2d');
+  c.width=window.innerWidth;c.height=window.innerHeight;
+  var p=[],colors=['#e94560','#ff6b81','#ff9f43','#54a0ff','#5f27cd','#1dd1a1','#f368e0','#ffd700'];
+  for(var i=0;i<120;i++)p.push({x:Math.random()*c.width,y:Math.random()*c.height-c.height,
+    w:Math.random()*8+3,h:Math.random()*5+2,color:colors[Math.floor(Math.random()*colors.length)],
+    vx:(Math.random()-.5)*2,vy:Math.random()*2+2,rot:Math.random()*360,rv:(Math.random()-.5)*5,op:1});
+  var f=0;
+  function anim(){
+    ctx.clearRect(0,0,c.width,c.height);
+    var a=0;
+    p.forEach(function(q){
+      q.x+=q.vx;q.y+=q.vy;q.vy+=.03;q.rot+=q.rv;
+      if(q.y>c.height+20||f>150)q.op-=.02;
+      if(q.op>0){a++;ctx.save();ctx.translate(q.x,q.y);ctx.rotate(q.rot*Math.PI/180);
+        ctx.globalAlpha=Math.max(0,q.op);ctx.fillStyle=q.color;ctx.fillRect(-q.w/2,-q.h/2,q.w,q.h);ctx.restore()}
+    });f++;if(a)requestAnimationFrame(anim);else if(c.parentNode)c.parentNode.removeChild(c);
+  }anim();
+}
+
+
+document.getElementById('shareBtn').onclick=function(){
+  var m=document.getElementById('qrModal');
+  var url=window.location.href;
+  document.getElementById('pageUrl').textContent=url;
+  var c=document.getElementById('qrContainer');
+  c.innerHTML='<span style="color:var(--text2);font-size:14px">⏳ Загрузка...</span>';
+  var img=new Image();
+  img.onload=function(){c.innerHTML='';c.appendChild(img)};
+  img.onerror=function(){c.innerHTML='<span style="color:var(--accent);font-size:13px">⚠️ Не удалось загрузить QR</span>'};
+  img.src='https://api.qrserver.com/v1/create-qr-code/?size=180x180&data='+encodeURIComponent(url);
+  img.alt='QR';
+  img.style.width='180px';img.style.height='180px';img.style.borderRadius='12px';img.style.background='#fff';img.style.padding='6px';
+  m.classList.add('active');
+};
+document.getElementById('closeModal').onclick=function(){document.getElementById('qrModal').classList.remove('active')};
+document.getElementById('qrModal').onclick=function(e){if(e.target===this)this.classList.remove('active')};
+
+document.getElementById('resetBtn').onclick=function(){if(confirm('Очистить все ответы?')){clearData();location.reload()}};
+
 
 document.addEventListener('keydown',function(e){
-  if(e.key==='ArrowRight')D.nextBtn.click();
-  if(e.key==='ArrowLeft')D.prevBtn.click();
+  if(document.getElementById('qrModal').classList.contains('active'))return;
+  if(e.key==='ArrowRight'||e.key==='Enter')next.click();
+  if(e.key==='ArrowLeft')prev.click();
 });
 
-(function(){
-  let d=gD();
-  if(d.length<6){
-    let sd=[
-      {q1:'1-3',q2:'often',q3:'anxious',anxiety:6,q5:'tried',q6:'irritable',q7:'often',q8:'sometimes',q9:'slightly',q10:'think',ts:Date.now()-60000},
-      {q1:'3-5',q2:'constantly',q3:'depressed',anxiety:8,q5:'tried',q6:'distracted',q7:'always',q8:'yes',q9:'yes',q10:'think',ts:Date.now()-120000},
-      {q1:'0-1',q2:'sometimes',q3:'better',anxiety:3,q5:'yes',q6:'none',q7:'rarely',q8:'no',q9:'no',q10:'yes',ts:Date.now()-180000},
-      {q1:'3-5',q2:'often',q3:'anxious',anxiety:7,q5:'no',q6:'less',q7:'often',q8:'yes',q9:'slightly',q10:'no',ts:Date.now()-240000},
-      {q1:'5+',q2:'constantly',q3:'depressed',anxiety:9,q5:'tried',q6:'irritable',q7:'always',q8:'sometimes',q9:'yes',q10:'think',ts:Date.now()-300000},
-      {q1:'1-3',q2:'sometimes',q3:'nothing',anxiety:4,q5:'tried',q6:'none',q7:'often',q8:'no',q9:'slightly',q10:'yes',ts:Date.now()-360000},
-    ];
-    sd.forEach(function(s){if(!d.find(function(r){return r.ts===s.ts}))d.push(s)});
-    sD(d);
-  }
-})();
+
+if(getData().length>0){
+  surveyCard.classList.add('hidden');
+  resultsCard.classList.remove('hidden');
+  setTimeout(function(){resultsCard.classList.add('results-enter')},50);
+  renderResults();
+}
 })();
 </script>
 </body>
