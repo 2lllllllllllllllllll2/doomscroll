@@ -41,8 +41,9 @@ html,body{height:100%;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-
 .card-c:hover{border-color:rgba(233,69,96,.2);background:rgba(233,69,96,.05);transform:translateY(-4px)}
 .card-c .ico{font-size:32px;display:block;margin-bottom:8px}
 .card-c .num{font-size:36px;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:4px}
-.card-c .title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px}
-.card-c .desc{font-size:14px;color:var(--text2);line-height:1.6}
+.card-c .title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px;display:block}
+.card-c .desc{font-size:14px;color:var(--text2);line-height:1.6;display:block}
+.card-c .num{display:block}
 .card-c .src{font-size:11px;color:var(--text3);margin-top:6px;display:block}
 
 .impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -253,7 +254,6 @@ html,body{height:100%;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-
           <span style="font-size:22px">💬</span>
           <span style="font-size:15px;color:var(--text2)">Готовые вопросы для <strong style="color:var(--text)">командного обсуждения</strong></span>
         </div>
-        <a class="btn-link" href="survey.html" style="margin-top:8px;width:fit-content">Перейти к опросу →</a>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(255,255,255,.025);border:1px solid rgba(40,40,80,.4);border-radius:16px;padding:32px;text-align:center">
         <span style="font-size:64px;margin-bottom:12px">📱</span>
@@ -311,7 +311,6 @@ html,body{height:100%;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-
     <h1><span class="grad">Вы контролируете телефон —<br>или телефон контролирует вас.</span></h1>
     <p style="font-size:clamp(16px,1.5vw,20px);color:var(--text2);max-width:600px;margin:0 auto 28px;line-height:1.7">Осознанность — первый шаг к свободе от думскролинга.<br>Не дайте алгоритмам управлять вашим вниманием.<br>Начните с малого: 30 минут без телефона сегодня.</p>
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-      <a class="btn-link" href="survey.html">🎯 Пройти опрос</a>
       <button class="btn-link" onclick="go(0)" style="background:rgba(255,255,255,.06);box-shadow:none;color:var(--text2)">↻ С начала</button>
     </div>
   </div>
