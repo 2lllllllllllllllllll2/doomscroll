@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Думскролинг — презентация</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#060612;--card:rgba(14,14,34,.85);--card2:#12122a;--card3:#1a1a3e;
+  --border:rgba(40,40,80,.5);--border2:rgba(60,60,100,.3);
+  --accent:#e94560;--accent2:#ff6b81;--accent3:#ff9f43;--blue:#4a7cff;
+  --text:#eeeef8;--text2:#8888bb;--text3:#55557a;--text4:#3a3a5a;
+  --r:20px;--rs:12px;--shadow:0 8px 60px rgba(0,0,0,.5);
+  --transition:0.5s cubic-bezier(.22,1,.36,1);
+}
+html{height:100%}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  background:var(--bg);color:var(--text);min-height:100%;overflow:hidden;
+  -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;
+}
+#particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.scene{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
+.scene .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.4}
+.scene .orb:nth-child(1){width:500px;height:500px;background:radial-gradient(circle,rgba(233,69,96,.15),transparent 70%);top:-150px;right:-100px;animation:float1 25s ease-in-out infinite}
+.scene .orb:nth-child(2){width:400px;height:400px;background:radial-gradient(circle,rgba(74,124,255,.1),transparent 70%);bottom:-100px;left:-100px;animation:float2 30s ease-in-out infinite}
+.scene .orb:nth-child(3){width:300px;height:300px;background:radial-gradient(circle,rgba(255,159,67,.08),transparent 70%);top:40%;right:10%;animation:float3 20s ease-in-out infinite}
+@keyframes float1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-60px,50px) scale(1.1)}66%{transform:translate(40px,-40px) scale(.9)}}
+@keyframes float2{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(50px,-60px) scale(1.15)}66%{transform:translate(-40px,50px) scale(.85)}}
+@keyframes float3{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,-30px)}}
+.wrapper{position:relative;z-index:1;width:100%;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px}
+.slider{width:100%;max-width:920px;height:100%;max-height:620px;position:relative}
+.slide{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  background:var(--card);backdrop-filter:blur(24px) saturate(1.2);
+  -webkit-backdrop-filter:blur(24px) saturate(1.2);
+  border-radius:var(--r);border:1px solid var(--border);
+  box-shadow:var(--shadow),0 0 0 1px rgba(255,255,255,.04) inset;
+  padding:44px 48px 40px;overflow-y:auto;
+  opacity:0;transform:translateY(30px) scale(.97);
+  transition:opacity .6s ease,transform .6s ease;
+  pointer-events:none;
+  display:flex;flex-direction:column;
+}
+.slide.active{opacity:1;transform:translateY(0) scale(1);pointer-events:all}
+.slide::-webkit-scrollbar{width:4px}
+.slide::-webkit-scrollbar-track{background:transparent}
+.slide::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.slide-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:4px 12px;border-radius:20px;font-size:10px;font-weight:700;
+  text-transform:uppercase;letter-spacing:1.2px;
+  background:rgba(233,69,96,.08);border:1px solid rgba(233,69,96,.12);
+  color:var(--accent);margin-bottom:8px;width:fit-content;
+}
+.slide h1{
+  font-size:clamp(32px,4vw,52px);font-weight:900;letter-spacing:-1px;
+  line-height:1.05;margin-bottom:8px;
+}
+.slide h1 .grad{background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.slide h1 .light{color:var(--text);font-weight:300;background:none;-webkit-text-fill-color:var(--text);display:block;font-size:clamp(18px,2vw,28px);margin-top:4px}
+.slide h2{font-size:clamp(20px,2.5vw,32px);font-weight:800;letter-spacing:-.3px;margin-bottom:4px;line-height:1.15}
+.slide .sub{font-size:14px;color:var(--text2);margin-bottom:20px;line-height:1.5;flex-shrink:0}
+.slide .content{flex:1;display:flex;flex-direction:column;justify-content:center}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.c{
+  background:rgba(255,255,255,.03);border-radius:14px;padding:18px 16px;
+  border:1px solid var(--border);transition:var(--transition);
+}
+.c:hover{border-color:rgba(233,69,96,.15);background:rgba(233,69,96,.04);transform:translateY(-2px)}
+.c .ico{font-size:28px;display:block;margin-bottom:6px}
+.c .num{font-size:28px;font-weight:800;color:var(--accent);display:block;line-height:1}
+.c .lbl{font-size:12px;color:var(--text2);margin-top:4px;line-height:1.4}
+.c .title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:2px}
+.c .desc{font-size:13px;color:var(--text2);line-height:1.5}
+.quote-box{
+  border-left:3px solid var(--accent);padding:16px 20px;margin:12px 0;
+  background:rgba(233,69,96,.04);border-radius:0 12px 12px 0;
+}
+.quote-box p{font-style:italic;font-size:15px;color:var(--text);margin-bottom:4px;line-height:1.6}
+.hero-center{text-align:center;flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.hero-center .big-icon{font-size:clamp(48px,6vw,80px);margin-bottom:12px}
+.step-dots{display:flex;justify-content:center;gap:6px;padding:16px 0 0;flex-shrink:0;flex-wrap:wrap}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--text4);border:none;cursor:pointer;transition:var(--transition);padding:0}
+.dot.active{background:var(--accent);width:28px;border-radius:4px}
+.dot:hover{background:var(--text3)}
+.nav-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 0 0;gap:12px;flex-shrink:0;border-top:1px solid var(--border);margin-top:12px;
+}
+.nav-bar .info{font-size:12px;color:var(--text3);font-weight:500}
+.nav-arrows{display:flex;gap:8px}
+.nav-btn{
+  display:flex;align-items:center;gap:6px;padding:8px 18px;
+  border:none;border-radius:10px;font-size:13px;font-weight:700;
+  cursor:pointer;transition:var(--transition);font-family:inherit;
+}
+.btn-prev{background:rgba(255,255,255,.05);color:var(--text2)}
+.btn-prev:hover{background:rgba(255,255,255,.1);color:var(--text)}
+.btn-prev:disabled{opacity:.2;cursor:default;transform:none!important}
+.btn-next{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 20px rgba(233,69,96,.25)}
+.btn-next:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(233,69,96,.35)}
+.btn-next:active{transform:scale(.97)}
+.btn-link{
+  display:inline-flex;align-items:center;gap:8px;padding:12px 24px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;
+  cursor:pointer;transition:var(--transition);text-decoration:none;font-family:inherit;
+  box-shadow:0 4px 24px rgba(233,69,96,.3);
+}
+.btn-link:hover{transform:translateY(-3px);box-shadow:0 8px 36px rgba(233,69,96,.4)}
+.btn-link:active{transform:scale(.97)}
+.btn-second{
+  display:inline-flex;align-items:center;gap:8px;padding:12px 24px;
+  background:rgba(255,255,255,.06);color:var(--text2);
+  border:1px solid var(--border);border-radius:12px;font-size:15px;font-weight:600;
+  cursor:pointer;transition:var(--transition);text-decoration:none;font-family:inherit;
+}
+.btn-second:hover{background:rgba(255,255,255,.1);color:var(--text);transform:translateY(-2px)}
+.impact-item{display:flex;gap:12px;padding:10px 14px;background:rgba(255,255,255,.025);border-radius:10px;border:1px solid var(--border);margin-bottom:8px}
+.impact-item .ii-ico{font-size:22px;flex-shrink:0}
+.impact-item .ii-title{font-size:14px;font-weight:700;color:var(--text)}
+.impact-item .ii-desc{font-size:12px;color:var(--text2);line-height:1.4}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:8px 0}
+.stat-big{text-align:center;background:rgba(255,255,255,.025);border-radius:14px;padding:14px 8px;border:1px solid var(--border);transition:var(--transition)}
+.stat-big:hover{border-color:rgba(233,69,96,.15)}
+.stat-big .num{font-size:clamp(28px,3vw,44px);font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.stat-big .lbl{font-size:11px;color:var(--text2);margin-top:6px;display:block;line-height:1.4;text-transform:uppercase;letter-spacing:.3px}
+.stat-big .src{font-size:9px;color:var(--text3);margin-top:2px;display:block}
+.fade-in{animation:fadeIn .8s ease both}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.delay-1{animation-delay:.1s}.delay-2{animation-delay:.2s}.delay-3{animation-delay:.3s}.delay-4{animation-delay:.4s}
+
+@media(max-width:720px){
+  .wrapper{padding:12px;justify-content:flex-start;padding-top:12px}
+  .slider{max-height:none;height:calc(100vh - 24px)}
+  .slide{padding:24px 20px 20px}
+  .grid-2,.grid-3,.grid-4,.stats-row{grid-template-columns:1fr 1fr}
+  .stats-row{grid-template-columns:1fr 1fr;gap:8px}
+  .nav-bar{flex-direction:column;gap:8px}
+  .slide h1{font-size:clamp(24px,6vw,32px)}
+  .slide h2{font-size:clamp(18px,4vw,24px)}
+  .c .ico{font-size:22px}
+}
+@media(max-width:420px){
+  .grid-2,.grid-4{grid-template-columns:1fr}
+  .slide{padding:16px 14px 14px}
+  .stat-big{padding:10px 6px}
+}
+</style>
+</head>
+<body>
+
+<div class="scene"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
+<canvas id="particles"></canvas>
+
+<div class="wrapper">
+<div class="slider">
+
+<!-- SLIDE 0: TITLE -->
+<div class="slide active" id="s0">
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center">
+    <div class="big-icon">📱</div>
+    <h1 style="margin-bottom:4px"><span class="grad">Думскролинг</span></h1>
+    <p style="font-size:clamp(16px,1.8vw,22px);color:var(--text);margin-bottom:4px">Как бесконечная лента крадёт наше внимание</p>
+    <p class="sub" style="margin-bottom:16px;font-size:13px">Групповое исследование • 9 слайдов</p>
+    <button class="btn-link" onclick="go(1)">Начать просмотр →</button>
+  </div>
+</div>
+
+<!-- SLIDE 1: ЧТО ЭТО -->
+<div class="slide" id="s1">
+  <div class="slide-badge">01</div>
+  <h2>Что такое думскролинг?</h2>
+  <p class="sub">Doom + scrolling — навязчивое потребление негативных новостей</p>
+  <div class="content">
+    <div class="grid-2">
+      <div class="c"><span class="ico">📜</span><span class="title">Происхождение термина</span><span class="desc">Впервые появился в Twitter в 2018 году. Взлетел в 2020 во время пандемии COVID-19.</span></div>
+      <div class="c"><span class="ico">🧠</span><span class="title">Психологический механизм</span><span class="desc">Чем больше читаешь — тем тревожнее. Но остановиться всё сложнее. Эффект «воронки».</span></div>
+      <div class="c"><span class="ico">📊</span><span class="title">Масштаб явления</span><span class="desc">96 раз в день средний человек проверяет телефон. Каждые 10 минут — прерывание.</span></div>
+      <div class="c"><span class="ico">💬</span><span class="title">Связь с коммуникацией</span><span class="desc">Думскролинг крадёт внимание, которое нужно для реального общения и командной работы.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2: МЕХАНИЗМЫ -->
+<div class="slide" id="s2">
+  <div class="slide-badge">02</div>
+  <h2>Почему мы залипаем?</h2>
+  <p class="sub">Три кита думскролинга: дофамин, негативное смещение, алгоритмы</p>
+  <div class="content">
+    <div class="grid-3">
+      <div class="c" style="text-align:center;padding:24px 16px">
+        <span class="ico" style="font-size:36px">🐕</span>
+        <span class="title">Дофаминовые петли</span>
+        <span class="desc" style="margin-top:6px">Каждый свайп — новая порция информации. Мозг получает дофамин и хочет ещё. Это как игровой автомат: непредсказуемое вознаграждение затягивает сильнее всего.</span>
+      </div>
+      <div class="c" style="text-align:center;padding:24px 16px">
+        <span class="ico" style="font-size:36px">⚠️</span>
+        <span class="title">Negativity bias</span>
+        <span class="desc" style="margin-top:6px">Эволюционно мы запрограммированы цепляться за плохое. Негатив удерживает внимание в 5 раз сильнее, чем позитив. Страх продаётся лучше всего.</span>
+      </div>
+      <div class="c" style="text-align:center;padding:24px 16px">
+        <span class="ico" style="font-size:36px">🤖</span>
+        <span class="title">Алгоритмы</span>
+        <span class="desc" style="margin-top:6px">Сенсации, страх, гнев — то, что удерживает пользователя. Алгоритмы обучаются на этом и подливают масла в огонь, максимизируя время экрана.</span>
+      </div>
+    </div>
+    <div class="quote-box" style="margin-top:4px">
+      <p>⬇ Свайп → Дофамин → Ещё свайп → Тревога → Снова свайп → Бесконечный цикл</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: ВЛИЯНИЕ НА ПСИХИКУ -->
+<div class="slide" id="s3">
+  <div class="slide-badge">03</div>
+  <h2>Влияние на психику</h2>
+  <p class="sub">Как думскролинг меняет наше внутреннее состояние</p>
+  <div class="content">
+    <div class="grid-4">
+      <div class="c" style="text-align:center">
+        <span class="ico" style="font-size:32px">😰</span>
+        <span class="title">Тревожность</span>
+        <span class="desc">Постоянное фоновое ощущение опасности. Мир кажется враждебным.</span>
+      </div>
+      <div class="c" style="text-align:center">
+        <span class="ico" style="font-size:32px">😴</span>
+        <span class="title">Усталость</span>
+        <span class="desc">Мозг обрабатывает тонны информации без передышки. Настоящего отдыха нет.</span>
+      </div>
+      <div class="c" style="text-align:center">
+        <span class="ico" style="font-size:32px">🌀</span>
+        <span class="title">Концентрация</span>
+        <span class="desc">Клиповое мышление. Невозможность удержать фокус дольше 5 минут.</span>
+      </div>
+      <div class="c" style="text-align:center">
+        <span class="ico" style="font-size:32px">🌙</span>
+        <span class="title">Сон</span>
+        <span class="desc">Синий свет + тревога перед сном = бессонница и поверхностный сон.</span>
+      </div>
+    </div>
+    <div class="stats-row" style="margin-top:4px">
+      <div class="stat-big"><span class="num">70%</span><span class="lbl">чувствуют тревогу после новостей</span><span class="src">APA</span></div>
+      <div class="stat-big"><span class="num">5ч</span><span class="lbl">среднее время в соцсетях у зумеров</span><span class="src">Common Sense</span></div>
+      <div class="stat-big"><span class="num">96</span><span class="lbl">раз в день проверяем телефон</span><span class="src">DataReportal</span></div>
+      <div class="stat-big"><span class="num">+40%</span><span class="lbl">роста потребления контента за 3 года</span><span class="src">Statista</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4: ВЛИЯНИЕ НА ОБЩЕНИЕ -->
+<div class="slide" id="s4">
+  <div class="slide-badge">04</div>
+  <h2>Как думскролинг убивает общение</h2>
+  <p class="sub">Влияние на командную коммуникацию и отношения</p>
+  <div class="content">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;flex:1">
+      <div class="impact-item"><span class="ii-ico">😤</span><div><span class="ii-title">Раздражительность</span><span class="ii-desc">От постоянного потока негатива снижается терпимость в разговоре. Любая мелочь выводит.</span></div></div>
+      <div class="impact-item"><span class="ii-ico">👁️</span><div><span class="ii-title">Поверхностное внимание</span><span class="ii-desc">Сложно удерживать фокус на собеседнике. Мыслями вы всё ещё в ленте.</span></div></div>
+      <div class="impact-item"><span class="ii-ico">🏠</span><div><span class="ii-title">Избегание живого общения</span><span class="ii-desc">Лента заменяет реальные встречи. Проще полистать, чем поговорить.</span></div></div>
+      <div class="impact-item"><span class="ii-ico">👀</span><div><span class="ii-title">FOMO + тревога</span><span class="ii-desc">Страх пропустить важное мешает присутствовать в моменте. Телефон проверяют даже ночью.</span></div></div>
+    </div>
+    <div class="stats-row" style="margin-top:4px">
+      <div class="stat-big"><span class="num">75%</span><span class="lbl">отвлекались на телефон во время разговора</span></div>
+      <div class="stat-big"><span class="num">-40%</span><span class="lbl">падение продуктивности при переключении</span></div>
+      <div class="stat-big"><span class="num">3×</span><span class="lbl">выше риск конфликтов в команде</span></div>
+      <div class="stat-big"><span class="num">60%</span><span class="lbl">чувствуют себя ненужными, когда собеседник в телефоне</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: ИССЛЕДОВАНИЯ -->
+<div class="slide" id="s5">
+  <div class="slide-badge">05</div>
+  <h2>Цифры, которые заставляют задуматься</h2>
+  <p class="sub">Исследования и статистика думскролинга</p>
+  <div class="content">
+    <div class="grid-3">
+      <div class="c" style="text-align:center;padding:24px 16px">
+        <span class="ico" style="font-size:40px;margin-bottom:6px">📊</span>
+        <div style="font-size:44px;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1">96</div>
+        <span class="desc">раз в день проверяет телефон средний человек. Это каждые 10 минут.</span>
+        <span class="src" style="font-size:10px;color:var(--text3);margin-top:4px;display:block">DataReportal 2025</span>
+      </div>
+      <div class="c" style="text-align:center;padding:24px 16px">
+        <span class="ico" style="font-size:40px;margin-bottom:6px">😰</span>
+        <div style="font-size:44px;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1">70%</div>
+        <span class="desc">пользователей испытывают тревогу или подавленность после чтения новостей.</span>
+        <span class="src" style="font-size:10px;color:var(--text3);margin-top:4px;display:block">APA опрос</span>
+      </div>
+      <div class="c" style="text-align:center;padding:24px 16px">
+        <span class="ico" style="font-size:40px;margin-bottom:6px">📈</span>
+        <div style="font-size:44px;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1">+40%</div>
+        <span class="desc">роста потребления цифрового контента за последние 3 года.</span>
+        <span class="src" style="font-size:10px;color:var(--text3);margin-top:4px;display:block">Statista</span>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:6px">Источники: DataReportal Digital 2025, American Psychological Association, Common Sense Media, Statista</p>
+  </div>
+</div>
+
+<!-- SLIDE 6: ИНТЕРАКТИВ -->
+<div class="slide" id="s6">
+  <div class="slide-badge">06</div>
+  <h2>🎯 Проверим на себе?</h2>
+  <p class="sub">Интерактивный опрос для всей группы</p>
+  <div class="content" style="align-items:center;text-align:center">
+    <div class="grid-2" style="width:100%;text-align:left">
+      <div style="display:flex;flex-direction:column;gap:10px;justify-content:center">
+        <div style="font-size:15px;font-weight:700;color:var(--accent);margin-bottom:4px">📋 Что вас ждёт:</div>
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--accent);font-weight:700">⏱️</span><span style="font-size:14px;color:var(--text2)"><strong style="color:var(--text)">10 вопросов</strong> — займёт 2 минуты</span></div>
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--accent);font-weight:700">🔒</span><span style="font-size:14px;color:var(--text2)">Анонимно — результаты увидит вся группа</span></div>
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--accent);font-weight:700">📊</span><span style="font-size:14px;color:var(--text2)">Диаграммы и статистика в реальном времени</span></div>
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--accent);font-weight:700">💬</span><span style="font-size:14px;color:var(--text2)">Готовые вопросы для командного обсуждения</span></div>
+        <a class="btn-link" href="survey.html" style="margin-top:8px;width:fit-content">Перейти к опросу →</a>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(255,255,255,.025);border-radius:14px;padding:20px;border:1px solid var(--border)">
+        <span style="font-size:48px;margin-bottom:8px">📱</span>
+        <span style="font-size:14px;color:var(--text2)">Откройте на телефоне</span>
+        <span style="font-size:12px;color:var(--text3)">или пройдите прямо сейчас</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7: РЕШЕНИЯ -->
+<div class="slide" id="s7">
+  <div class="slide-badge">07</div>
+  <h2>Что делать? Индивидуальные шаги</h2>
+  <p class="sub">Простые, но эффективные решения</p>
+  <div class="content">
+    <div class="grid-4">
+      <div class="c" style="text-align:center;padding:20px 12px">
+        <span class="ico" style="font-size:32px">📵</span>
+        <span class="title">Цифровой детокс</span>
+        <span class="desc">30 минут без телефона перед сном. Замените на книгу или прогулку.</span>
+      </div>
+      <div class="c" style="text-align:center;padding:20px 12px">
+        <span class="ico" style="font-size:32px">🔕</span>
+        <span class="title">Отключите уведомления</span>
+        <span class="desc">Новостные приложения не должны вас дёргать каждые 5 минут.</span>
+      </div>
+      <div class="c" style="text-align:center;padding:20px 12px">
+        <span class="ico" style="font-size:32px">⏱️</span>
+        <span class="title">Таймеры</span>
+        <span class="desc">Используйте экранное время. Лимит — осознанный выбор, а не запрет.</span>
+      </div>
+      <div class="c" style="text-align:center;padding:20px 12px">
+        <span class="ico" style="font-size:32px">📰</span>
+        <span class="title">Дозировка новостей</span>
+        <span class="desc">Проверяйте новости 2 раза в день, а не 20 раз в час.</span>
+      </div>
+    </div>
+    <div class="quote-box" style="margin-top:8px">
+      <p>💡 Главное — не запрет, а замена. Найдите, чем занять руки и мозг вместо телефона: книга, спорт, прогулка, живой разговор.</p>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap">
+      <div style="background:rgba(255,255,255,.025);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--text2);border:1px solid var(--border)">📚 Книга</div>
+      <div style="background:rgba(255,255,255,.025);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--text2);border:1px solid var(--border)">🚶 Прогулка</div>
+      <div style="background:rgba(255,255,255,.025);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--text2);border:1px solid var(--border)">🏋️ Спорт</div>
+      <div style="background:rgba(255,255,255,.025);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--text2);border:1px solid var(--border)">💬 Живой разговор</div>
+      <div style="background:rgba(255,255,255,.025);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--text2);border:1px solid var(--border)">🧘 Медитация</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8: ВЫВОД -->
+<div class="slide" id="s8">
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center">
+    <div style="font-size:clamp(48px,6vw,72px);margin-bottom:12px">💪</div>
+    <h1 style="font-size:clamp(24px,3vw,42px);margin-bottom:8px">
+      <span style="background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+        Вы контролируете телефон —<br>или телефон контролирует вас.
+      </span>
+    </h1>
+    <p style="font-size:clamp(14px,1.5vw,18px);color:var(--text2);max-width:500px;line-height:1.6;margin-bottom:16px">
+      Осознанность — первый шаг к свободе от думскролинга.<br>
+      Не дайте алгоритмам управлять вашим вниманием.<br>
+      Начните с малого: 30 минут без телефона сегодня.
+    </p>
+    <a class="btn-link" href="survey.html">Пройти опрос 🎯</a>
+  </div>
+</div>
+
+</div>
+
+<div class="step-dots" id="dots"></div>
+<div class="nav-bar">
+  <span class="info" id="slideInfo">1 / 9</span>
+  <div class="nav-arrows">
+    <button class="nav-btn btn-prev" id="prevBtn" disabled>← Назад</button>
+    <button class="nav-btn btn-next" id="nextBtn">Далее →</button>
+  </div>
+</div>
+</div>
+
+<script>
+(function(){
+const T=9;let cur=0;
+const dotsEl=document.getElementById('dots');
+for(let i=0;i<T;i++){const d=document.createElement('button');d.className='dot'+(i===0?' active':'');d.onclick=function(){go(i)};dotsEl.appendChild(d)}
+function go(i){
+  document.querySelectorAll('.slide').forEach(function(s,j){s.classList.toggle('active',j===i)});
+  cur=i;
+  document.querySelectorAll('.dot').forEach(function(d,j){d.classList.toggle('active',j===i)});
+  document.getElementById('slideInfo').textContent=(i+1)+' / '+T;
+  document.getElementById('prevBtn').disabled=i===0;
+  document.getElementById('nextBtn').textContent=i===T-1?'Завершить ✓':'Далее →';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+window.go=go;
+document.getElementById('prevBtn').onclick=function(){if(cur>0)go(cur-1)};
+document.getElementById('nextBtn').onclick=function(){if(cur<T-1)go(cur+1)};
+document.addEventListener('keydown',function(e){
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')go(Math.min(cur+1,T-1));
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(Math.max(cur-1,0));
+});
+let sx=0,sy=0;
+document.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY});
+document.addEventListener('touchend',function(e){
+  const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;
+  if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){if(dx<0)go(Math.min(cur+1,T-1));else go(Math.max(cur-1,0))}
+});
+})();
+</script>
+</body>
+</html>
