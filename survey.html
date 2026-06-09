@@ -175,7 +175,6 @@ body::after{width:500px;height:500px;background:radial-gradient(circle,rgba(74,1
 <div class="container">
 
 <div class="hero">
-  <div class="label"><span class="pulse"></span> Живое исследование группы</div>
   <h1><span class="grad">Думскролинг</span></h1>
   <p class="desc">Анонимно — 10 вопросов. После ответа — персональный уровень думскролинга и результаты группы.</p>
 </div>
@@ -188,21 +187,7 @@ body::after{width:500px;height:500px;background:radial-gradient(circle,rgba(74,1
     </div>
   </div>
   <div class="card-inner">
-    <div id="welcome">
-      <div class="welcome">
-        <div class="big-icon">🧠</div>
-        <h2>Честный разговор о думскролинге</h2>
-        <p class="sub">Анонимно — результаты увидит вся группа</p>
-        <div class="info-items">
-          <div class="ii"><span class="ii-icon">⏱️</span><span class="ii-text"><strong>2 минуты</strong> — 10 вопросов</span></div>
-          <div class="ii"><span class="ii-icon">📊</span><span class="ii-text">После ответа — <strong>персональный уровень думскролинга</strong></span></div>
-          <div class="ii"><span class="ii-icon">👥</span><span class="ii-text">Увидишь <strong>результаты всей группы</strong></span></div>
-          <div class="ii"><span class="ii-icon">💬</span><span class="ii-text">Вопросы для <strong>командного обсуждения</strong></span></div>
-        </div>
-        <button class="start-btn" id="startBtn">Начать опрос →</button>
-      </div>
-    </div>
-    <div class="slides-wrap" id="slidesWrap" style="display:none">
+    <div class="slides-wrap" id="slidesWrap">
       <form id="surveyForm" onsubmit="return false;">
       <div class="slide" data-q="q1">
         <div class="slide-step"><span class="step-dot active">1</span><span class="step-dot">2</span><span class="step-dot">3</span><span class="step-dot">4</span><span class="step-dot">5</span><span class="step-dot">6</span><span class="step-dot">7</span><span class="step-dot">8</span><span class="step-dot">9</span><span class="step-dot">10</span></div>
@@ -563,7 +548,7 @@ D.qrModal.onclick=function(e){if(e.target===this)this.classList.remove('active')
 D.resetBtn.onclick=function(){if(confirm('Очистить все ответы?')){cD();location.reload()}};
 D.siteBtn.onclick=function(){window.location.href='index.html'};
 
-D.startBtn.onclick=function(){D.welcome.style.display='none';D.slidesWrap.style.display='block';go(0)};
+go(0);
 
 document.addEventListener('keydown',function(e){
   if(D.qrModal.classList.contains('active'))return;
