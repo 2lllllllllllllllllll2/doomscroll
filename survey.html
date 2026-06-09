@@ -8,184 +8,170 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:#060612;--card:rgba(14,14,34,.88);--card2:#12122a;--card3:#1a1a3e;
-  --border:rgba(40,40,80,.6);--border2:rgba(60,60,100,.3);
-  --accent:#e94560;--accent2:#ff6b81;--accent3:#ff9f43;--blue:#4a7cff;
-  --text:#eeeef8;--text2:#8888bb;--text3:#55557a;
-  --r:20px;--rs:12px;--shadow:0 8px 60px rgba(0,0,0,.5);
-  --transition:0.4s cubic-bezier(.22,1,.36,1);
-}
-html{height:100%}
-body{
-  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
-  background:var(--bg);color:var(--text);min-height:100%;
-  display:flex;justify-content:center;padding:0;
-  -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:hidden;
-}
+:root{--bg:#060612;--accent:#e94560;--accent2:#ff6b81;--accent3:#ff9f43;--blue:#4a7cff;--text:#eeeef8;--text2:#8888bb;--text3:#55557a;--border:rgba(40,40,80,.5);--transition:.4s cubic-bezier(.22,1,.36,1)}
+html,body{height:100%;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
 body::before,body::after{content:'';position:fixed;pointer-events:none;z-index:0;border-radius:50%}
 body::before{width:600px;height:600px;background:radial-gradient(circle,rgba(233,69,96,.08),transparent 70%);top:-200px;right:-200px;animation:f1 20s ease-in-out infinite}
 body::after{width:500px;height:500px;background:radial-gradient(circle,rgba(74,124,255,.06),transparent 70%);bottom:-150px;left:-150px;animation:f2 25s ease-in-out infinite}
 @keyframes f1{0%,100%{transform:translate(0,0)}33%{transform:translate(-40px,50px)}66%{transform:translate(30px,-30px)}}
 @keyframes f2{0%,100%{transform:translate(0,0)}33%{transform:translate(50px,-40px)}66%{transform:translate(-30px,40px)}}
-.container{max-width:660px;width:100%;position:relative;z-index:1;padding:28px 20px}
 
-.hero{margin-bottom:20px;text-align:center}
-.hero .label{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:500;background:rgba(233,69,96,.06);border:1px solid rgba(233,69,96,.1);color:var(--accent);letter-spacing:.15px;margin-bottom:12px}
+.wrapper{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:32px 20px}
+.wrapper.survey-done{justify-content:center}
+.container{width:100%;max-width:640px}
+
+.hero{text-align:center;margin-bottom:24px}
+.hero .label{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;font-size:11px;font-weight:600;background:rgba(233,69,96,.07);border:1px solid rgba(233,69,96,.1);color:var(--accent);letter-spacing:.15px;margin-bottom:14px}
 .hero .label .pulse{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(233,69,96,.4)}50%{opacity:.6;box-shadow:0 0 0 6px rgba(233,69,96,0)}}
 .hero h1{font-size:clamp(28px,5vw,44px);font-weight:900;letter-spacing:-1px;line-height:1.05;margin-bottom:4px}
 .hero h1 .grad{background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero .desc{font-size:14px;color:var(--text2);line-height:1.5;font-weight:400}
+.hero .desc{font-size:14px;color:var(--text2);line-height:1.5}
 
-.card{
-  background:var(--card);backdrop-filter:blur(24px) saturate(1.2);
-  -webkit-backdrop-filter:blur(24px) saturate(1.2);
-  border-radius:var(--r);box-shadow:var(--shadow),0 0 0 1px rgba(255,255,255,.04) inset;
-  border:1px solid var(--border);overflow:hidden;
-}
+.card{background:rgba(14,14,34,.85);backdrop-filter:blur(24px) saturate(1.2);-webkit-backdrop-filter:blur(24px) saturate(1.2);border-radius:20px;border:1px solid var(--border);box-shadow:0 8px 60px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.04) inset;overflow:hidden}
 .card.hidden{display:none}
-.card-inner{padding:28px 28px 0}
-
-.progress-section{padding:0 28px;margin-bottom:4px}
+.card-inner{padding:32px 32px 0}
+.progress-section{padding:0 32px;margin-bottom:8px}
 .progress-row{display:flex;align-items:center;gap:12px}
 .progress-track{flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
 .progress-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .6s ease;width:0%}
-.progress-num{font-size:12px;font-weight:700;color:var(--text2);min-width:36px;text-align:right}
+.progress-num{font-size:13px;font-weight:700;color:var(--text2);min-width:36px;text-align:right}
 
 .slides-wrap{position:relative;min-height:340px}
 .slide{display:none;animation:slideIn .4s ease}
 .slide.active{display:block}
 @keyframes slideIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-.slide-step{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
-.step-dot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;background:var(--border);color:var(--text3);transition:var(--transition);flex-shrink:0}
+.slide-step{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.step-dot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;background:rgba(255,255,255,.05);color:var(--text3);transition:var(--transition);flex-shrink:0}
 .step-dot.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
 .step-dot.done{background:rgba(233,69,96,.15);color:var(--accent)}
-.slide-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--accent);margin-bottom:2px}
-.slide h2{font-size:19px;font-weight:700;line-height:1.3;margin-bottom:2px}
-.slide .sub{font-size:13px;color:var(--text2);margin-bottom:16px;line-height:1.4;transition:.3s}
+.slide-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--accent);margin-bottom:4px}
+.slide h2{font-size:20px;font-weight:700;line-height:1.3;margin-bottom:2px}
+.slide .sub{font-size:13px;color:var(--text2);margin-bottom:18px;line-height:1.4;transition:.3s}
 .slide .sub.err{color:var(--accent)!important;font-weight:600}
 
 .options{display:flex;flex-direction:column;gap:8px}
-.opt{
-  display:flex;align-items:center;gap:12px;padding:12px 16px;
-  background:rgba(255,255,255,.03);border:2px solid var(--border);
-  border-radius:12px;cursor:pointer;transition:var(--transition);
-}
+.opt{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(255,255,255,.03);border:2px solid var(--border);border-radius:12px;cursor:pointer;transition:var(--transition)}
 .opt:hover{border-color:rgba(233,69,96,.25);background:rgba(233,69,96,.05)}
 .opt input{position:absolute;opacity:0;pointer-events:none}
 .opt .radio{width:20px;height:20px;border-radius:50%;border:2px solid var(--text3);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:var(--transition)}
 .opt .radio::after{content:'';width:9px;height:9px;border-radius:50%;background:var(--accent);transform:scale(0);transition:var(--transition)}
 .opt .ico{font-size:18px;flex-shrink:0}
-.opt .lbl{font-size:14px;font-weight:500;flex:1;transition:var(--transition);color:var(--text2)}
-.opt .subtxt{font-size:11px;color:var(--text3);display:block;margin-top:1px;font-weight:400}
+.opt .lbl{font-size:14px;font-weight:500;flex:1;color:var(--text2)}
+.opt .subtxt{font-size:11px;color:var(--text3);display:block;margin-top:2px;font-weight:400}
 .opt.selected{border-color:var(--accent);background:rgba(233,69,96,.08)}
 .opt.selected .radio{border-color:var(--accent)}
 .opt.selected .radio::after{transform:scale(1)}
 .opt.selected .lbl{color:var(--text)}
-
-.range-wrap{padding:4px 0}
+.range-wrap{padding:8px 0}
 .range-wrap input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:5px;border-radius:3px;background:var(--border);outline:none}
-.range-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:24px;height:24px;border-radius:50%;background:var(--accent);cursor:pointer;border:3px solid var(--card);box-shadow:0 0 20px rgba(233,69,96,.3)}
-.range-wrap input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--accent);cursor:pointer;border:3px solid var(--card)}
+.range-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--accent);cursor:pointer;border:3px solid rgba(14,14,34,.9);box-shadow:0 0 20px rgba(233,69,96,.3)}
+.range-wrap input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--accent);cursor:pointer;border:3px solid rgba(14,14,34,.9)}
 .range-ticks{display:flex;justify-content:space-between;margin:4px 0 0}
 .range-ticks span{width:2px;height:6px;background:var(--border);border-radius:1px}
 .range-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-top:4px}
-.range-value{text-align:center;font-size:38px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin:4px 0 2px}
+.range-value{text-align:center;font-size:40px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin:6px 0 2px}
 .range-value .suf{font-size:14px;font-weight:400;color:var(--text2);-webkit-text-fill-color:var(--text2)}
 
-.nav{display:flex;gap:8px;padding:16px 28px 24px}
+.nav{display:flex;gap:8px;padding:20px 32px 28px}
 .nav button{flex:1;padding:12px;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;transition:var(--transition);font-family:inherit}
 .btn-prev{background:rgba(255,255,255,.05);color:var(--text2)}
 .btn-prev:hover{background:rgba(255,255,255,.1);color:var(--text)}
 .btn-prev:disabled{opacity:.2;cursor:default}
 .btn-next{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 20px rgba(233,69,96,.25)}
-.btn-next:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(233,69,96,.35)}
-.btn-next:active{transform:scale(.97)}
+.btn-next:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(233,69,96,.35);}
 
-.welcome{text-align:center;padding:16px 0 4px}
-.welcome .big-icon{font-size:56px;margin-bottom:8px}
-.welcome .info-items{display:flex;flex-direction:column;gap:8px;margin:16px 0;text-align:left;background:rgba(255,255,255,.03);border-radius:12px;padding:14px 18px}
+.welcome{text-align:center;padding:20px 0 8px}
+.welcome .big-icon{font-size:60px;margin-bottom:10px}
+.welcome h2{font-size:22px;font-weight:700;margin-bottom:4px}
+.welcome .sub{font-size:14px;color:var(--text2);margin-bottom:16px}
+.welcome .info-items{display:flex;flex-direction:column;gap:10px;margin:18px 0;text-align:left;background:rgba(255,255,255,.025);border-radius:12px;padding:16px 20px}
 .welcome .info-items .ii{display:flex;gap:10px;align-items:flex-start}
-.welcome .info-items .ii .ii-icon{font-size:16px;flex-shrink:0}
-.welcome .info-items .ii .ii-text{font-size:13px;color:var(--text2);line-height:1.4}
+.welcome .info-items .ii .ii-icon{font-size:18px;flex-shrink:0}
+.welcome .info-items .ii .ii-text{font-size:14px;color:var(--text2);line-height:1.4}
 .welcome .info-items .ii .ii-text strong{color:var(--text)}
-.start-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;padding:14px 36px;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:var(--transition);box-shadow:0 4px 20px rgba(233,69,96,.3);margin-top:4px;font-family:inherit}
-.start-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(233,69,96,.4)}
+.start-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;padding:14px 40px;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:var(--transition);box-shadow:0 4px 24px rgba(233,69,96,.25);margin-top:4px;font-family:inherit}
+.start-btn:hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(233,69,96,.35)}
 
-.results-card .card-inner{padding:24px 28px 20px}
-.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:16px}
-.profile-item{background:rgba(255,255,255,.03);border-radius:12px;padding:14px 12px;text-align:center;border:1px solid var(--border)}
-.profile-item .pi-ico{font-size:24px;margin-bottom:2px;display:block}
+.results{padding:32px;animation:resIn .6s ease}
+@keyframes resIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+.doomscore{background:linear-gradient(135deg,rgba(233,69,96,.08),rgba(233,69,96,.02));border-radius:16px;padding:20px;margin-bottom:20px;text-align:center;border:1px solid rgba(233,69,96,.12)}
+.doomscore .ds-lbl{font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.doomscore .ds-score{font-size:clamp(40px,6vw,56px);font-weight:900;line-height:1}
+.doomscore .ds-desc{font-size:16px;color:var(--text);margin-top:6px;font-weight:600}
+.doomscore .ds-tip{font-size:13px;color:var(--text2);margin-top:4px}
+
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:20px}
+.profile-item{background:rgba(255,255,255,.025);border-radius:12px;padding:14px 12px;text-align:center;border:1px solid var(--border)}
+.profile-item .pi-ico{font-size:24px;display:block;margin-bottom:2px}
 .profile-item .pi-val{font-size:20px;font-weight:800;color:var(--text);display:block}
-.profile-item .pi-lbl{font-size:10px;color:var(--text2);margin-top:1px;display:block;text-transform:uppercase;letter-spacing:.3px;font-weight:600}
+.profile-item .pi-lbl{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:.3px;font-weight:600}
 
-.doomscore-box{background:linear-gradient(135deg,rgba(233,69,96,.1),rgba(233,69,96,.03));border-radius:14px;padding:16px;margin-bottom:16px;text-align:center;border:1px solid rgba(233,69,96,.15)}
-.doomscore-box .ds-label{font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
-.doomscore-box .ds-score{font-size:clamp(36px,6vw,52px);font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
-.doomscore-box .ds-desc{font-size:14px;color:var(--text);margin-top:4px;font-weight:600}
-.doomscore-box .ds-sub{font-size:12px;color:var(--text2);margin-top:2px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px}
+.kpi{background:rgba(255,255,255,.025);border-radius:10px;padding:12px 6px;text-align:center;border:1px solid var(--border)}
+.kpi .k-num{font-size:22px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2}
+.kpi .k-lbl{font-size:9px;color:var(--text2);margin-top:2px;text-transform:uppercase;letter-spacing:.3px;font-weight:600}
 
-.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
-.kpi{background:rgba(255,255,255,.03);border-radius:10px;padding:12px 6px;text-align:center;border:1px solid var(--border)}
-.kpi .num{font-size:22px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2}
-.kpi .lbl{font-size:9px;color:var(--text2);margin-top:2px;text-transform:uppercase;letter-spacing:.3px;font-weight:600}
+.insight{background:linear-gradient(135deg,rgba(233,69,96,.05),rgba(233,69,96,.01));border-radius:10px;padding:14px 16px;margin-bottom:16px;font-size:14px;line-height:1.6;border-left:3px solid var(--accent)}
+.insight strong{color:var(--accent)}
 
-.charts-grid{display:flex;flex-direction:column;gap:12px;margin-bottom:14px}
-.chart-box{background:rgba(255,255,255,.02);border-radius:12px;padding:14px 16px;border:1px solid var(--border)}
+.charts{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+.chart-box{background:rgba(255,255,255,.02);border-radius:12px;padding:16px;border:1px solid var(--border)}
 .chart-box h3{font-size:12px;font-weight:700;color:var(--text2);margin-bottom:10px}
 .chart-box h3 .n{font-weight:400;color:var(--text3)}
 .bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
 .bar-label{width:120px;font-size:12px;color:var(--text);flex-shrink:0;font-weight:500;line-height:1.2}
-.bar-track{flex:1;height:24px;background:var(--border2);border-radius:5px;overflow:hidden;position:relative}
+.bar-track{flex:1;height:24px;background:rgba(60,60,100,.2);border-radius:5px;overflow:hidden;position:relative}
 .bar-fill{height:100%;border-radius:5px;transition:width 1.2s cubic-bezier(.22,1,.36,1);position:relative;min-width:0;display:flex;align-items:center}
-.bar-fill .bar-val{font-size:10px;font-weight:700;color:#fff;padding-left:6px;white-space:nowrap;opacity:0;transition:opacity .5s ease .6s;text-shadow:0 1px 3px rgba(0,0,0,.3)}
+.bar-fill .bar-val{font-size:10px;font-weight:700;color:#fff;padding-left:6px;white-space:nowrap;opacity:0;transition:opacity .5s ease .6s}
 .bar-fill.show .bar-val{opacity:1}
 .bar-count{min-width:30px;text-align:right;font-size:13px;font-weight:700;color:var(--text2);flex-shrink:0}
-.discuss-box{background:linear-gradient(135deg,rgba(84,160,255,.06),rgba(95,39,205,.03));border-radius:14px;padding:16px;margin:14px 0;border:1px solid rgba(84,160,255,.12)}
-.discuss-box .d-title{font-size:13px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
-.discuss-box .d-title .d-ico{font-size:18px}
-.discuss-box .d-item{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)}
-.discuss-box .d-item:last-child{border-bottom:none}
-.discuss-box .d-num{width:22px;height:22px;border-radius:50%;background:rgba(84,160,255,.12);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--blue);flex-shrink:0}
-.discuss-box .d-text{font-size:13px;color:var(--text2);line-height:1.5;flex:1}
-.insight-bar{background:linear-gradient(135deg,rgba(233,69,96,.06),rgba(233,69,96,.02));border-radius:10px;padding:12px 14px;margin:12px 0;font-size:13px;line-height:1.6;border-left:3px solid var(--accent)}
-.insight-bar strong{color:var(--accent)}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+
+.discuss{background:linear-gradient(135deg,rgba(84,160,255,.05),rgba(95,39,205,.03));border-radius:14px;padding:18px;margin:16px 0;border:1px solid rgba(84,160,255,.1)}
+.discuss .d-title{font-size:14px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.discuss .d-item{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.discuss .d-item:last-child{border-bottom:none}
+.discuss .d-num{width:22px;height:22px;border-radius:50%;background:rgba(84,160,255,.1);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--blue);flex-shrink:0}
+.discuss .d-text{font-size:13px;color:var(--text2);line-height:1.5;flex:1}
+
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
 .actions button{flex:1;min-width:120px;padding:11px 16px;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;transition:var(--transition);font-family:inherit}
 .btn-share{background:rgba(255,255,255,.06);color:var(--text2);border:1px solid var(--border)}
 .btn-share:hover{background:rgba(255,255,255,.1);color:var(--text)}
 .btn-reset{background:rgba(233,69,96,.12);color:var(--accent)}
 .btn-reset:hover{background:rgba(233,69,96,.2)}
-.btn-site{background:rgba(74,124,255,.12);color:var(--blue)}
+.btn-site{background:rgba(74,124,255,.1);color:var(--blue)}
 .btn-site:hover{background:rgba(74,124,255,.2)}
 
-.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);z-index:100;justify-content:center;align-items:center}
-.modal-overlay.active{display:flex;animation:fadeIn .3s ease}
-.modal-box{background:var(--card3);border-radius:var(--r);padding:28px;max-width:320px;width:90%;text-align:center;border:1px solid var(--border);box-shadow:var(--shadow)}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);z-index:100;justify-content:center;align-items:center}
+.modal.active{display:flex;animation:fadeIn .3s ease}
+.modal-box{background:rgba(26,26,62,.95);border-radius:20px;padding:28px;max-width:320px;width:90%;text-align:center;border:1px solid var(--border);box-shadow:0 8px 60px rgba(0,0,0,.5)}
 .modal-box h3{font-size:17px;margin-bottom:6px}
 .modal-box .sub{color:var(--text2);font-size:12px;margin-bottom:14px}
 .modal-box .qr-img img{width:160px;height:160px;border-radius:10px;background:#fff;padding:5px}
 .modal-box .qr-url{font-size:9px;color:var(--text2);word-break:break-all;margin-top:8px;background:rgba(0,0,0,.3);padding:5px 8px;border-radius:4px;user-select:all}
-.modal-box .close-btn{margin-top:12px;padding:8px 28px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-weight:700;cursor:pointer;font-size:13px;font-family:inherit}
+.modal-box .close-btn{margin-top:12px;padding:9px 28px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-weight:700;cursor:pointer;font-size:13px;font-family:inherit}
 .modal-box .close-btn:hover{opacity:.9}
 #confetti{z-index:999;pointer-events:none;position:fixed;top:0;left:0;width:100%;height:100%}
-
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes resultsIn{from{opacity:0;transform:translateY(30px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
 
 @media(max-width:560px){
-  .card-inner{padding:18px 16px 0}.progress-section{padding:0 16px}
-  .nav{padding:12px 16px 18px}.hero h1{font-size:clamp(24px,6vw,34px)}
-  .slide h2{font-size:17px}.kpi-grid{grid-template-columns:repeat(2,1fr)}
-  .range-value{font-size:30px}.actions button{min-width:100%}
-  .welcome .big-icon{font-size:44px}.profile-grid{grid-template-columns:1fr 1fr}
-  .bar-label{width:90px;font-size:11px}.slide{padding:0}
-  .discuss-box{padding:12px}
+  .wrapper{padding:20px 12px}
+  .card-inner{padding:20px 16px 0}
+  .progress-section{padding:0 16px}
+  .results{padding:20px}
+  .nav{padding:16px 16px 20px}
+  .slide h2{font-size:18px}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .profile-grid{grid-template-columns:1fr 1fr}
+  .bar-label{width:90px;font-size:11px}
+  .actions button{min-width:100%}
 }
 </style>
 </head>
 <body>
+<div class="wrapper" id="wrapper">
 <div class="container">
 
 <div class="hero">
@@ -202,16 +188,16 @@ body::after{width:500px;height:500px;background:radial-gradient(circle,rgba(74,1
     </div>
   </div>
   <div class="card-inner">
-    <div id="welcomeScreen">
+    <div id="welcome">
       <div class="welcome">
         <div class="big-icon">🧠</div>
-        <h2 style="font-size:22px;font-weight:700;margin-bottom:4px">Честный разговор о думскролинге</h2>
-        <p class="sub" style="margin-bottom:2px">Анонимно — результаты увидит вся группа</p>
+        <h2>Честный разговор о думскролинге</h2>
+        <p class="sub">Анонимно — результаты увидит вся группа</p>
         <div class="info-items">
           <div class="ii"><span class="ii-icon">⏱️</span><span class="ii-text"><strong>2 минуты</strong> — 10 вопросов</span></div>
           <div class="ii"><span class="ii-icon">📊</span><span class="ii-text">После ответа — <strong>персональный уровень думскролинга</strong></span></div>
-          <div class="ii"><span class="ii-icon">👥</span><span class="ii-text">Увидишь <strong>результаты всей группы</strong> в реальном времени</span></div>
-          <div class="ii"><span class="ii-icon">💬</span><span class="ii-text">В конце — вопросы для <strong>командного обсуждения</strong></span></div>
+          <div class="ii"><span class="ii-icon">👥</span><span class="ii-text">Увидишь <strong>результаты всей группы</strong></span></div>
+          <div class="ii"><span class="ii-icon">💬</span><span class="ii-text">Вопросы для <strong>командного обсуждения</strong></span></div>
         </div>
         <button class="start-btn" id="startBtn">Начать опрос →</button>
       </div>
@@ -338,44 +324,45 @@ body::after{width:500px;height:500px;background:radial-gradient(circle,rgba(74,1
     </div>
   </div>
   <div class="nav" id="navBtns">
-    <button class="btn-prev" id="prevBtn" disabled>← Назад</button>
+    <button class="btn-prev" id="prevBtn" disabled>←</button>
     <button class="btn-next" id="nextBtn">Далее →</button>
   </div>
 </div>
 
-<div class="card hidden results-card" id="resultsCard">
-  <div class="card-inner">
-    <div class="doomscore-box" id="doomscoreBox">
-      <div class="ds-label">🔥 Твой уровень думскролинга</div>
+<div class="hidden" id="resultsWrap">
+  <div class="results" id="resultsContent">
+    <div class="doomscore" id="doomscoreBox">
+      <div class="ds-lbl">🔥 Твой уровень думскролинга</div>
       <div class="ds-score" id="doomscoreDisplay">0</div>
       <div class="ds-desc" id="doomscoreDesc">Загрузка...</div>
-      <div class="ds-sub" id="doomscoreTip"></div>
+      <div class="ds-tip" id="doomscoreTip"></div>
     </div>
     <div class="profile-grid" id="profileGrid"></div>
     <div class="kpi-grid">
-      <div class="kpi"><div class="num" id="kpiTotal">0</div><div class="lbl">Всего ответов</div></div>
-      <div class="kpi"><div class="num" id="kpiAnxiety">0.0</div><div class="lbl">Ср. тревога</div></div>
-      <div class="kpi"><div class="num" id="kpiHeavy">0</div><div class="lbl">Скроллят >3ч</div></div>
-      <div class="kpi"><div class="num" id="kpiDistract">0</div><div class="lbl">Отвлекаются</div></div>
+      <div class="kpi"><div class="k-num" id="kpiTotal">0</div><div class="k-lbl">Всего ответов</div></div>
+      <div class="kpi"><div class="k-num" id="kpiAnxiety">0.0</div><div class="k-lbl">Ср. тревога</div></div>
+      <div class="kpi"><div class="k-num" id="kpiHeavy">0</div><div class="k-lbl">Скроллят >3ч</div></div>
+      <div class="kpi"><div class="k-num" id="kpiDistract">0</div><div class="k-lbl">Отвлекаются</div></div>
     </div>
-    <div class="insight-bar" id="insightBar"></div>
-    <div class="charts-grid" id="chartsContainer"></div>
-    <div class="discuss-box" id="discussBox">
-      <div class="d-title"><span class="d-ico">💬</span> Обсуждение для группы</div>
+    <div class="insight" id="insightBar"></div>
+    <div class="charts" id="chartsContainer"></div>
+    <div class="discuss" id="discussBox">
+      <div class="d-title">💬 Обсуждение для группы</div>
       <div id="discussItems"></div>
     </div>
     <div class="actions">
-      <button class="btn-share" id="shareBtn">📤 Поделиться опросом</button>
+      <button class="btn-share" id="shareBtn">📤 Поделиться</button>
       <button class="btn-site" id="siteBtn">📖 Презентация</button>
-      <button class="btn-reset" id="resetBtn">🔄 Пройти заново</button>
+      <button class="btn-reset" id="resetBtn">🔄 Заново</button>
     </div>
   </div>
 </div>
 </div>
+</div>
 
-<div class="modal-overlay" id="qrModal">
+<div class="modal" id="qrModal">
   <div class="modal-box">
-    <h3>📤 Поделиться опросом</h3>
+    <h3>📤 Поделиться</h3>
     <p class="sub">Отсканируй QR или отправь ссылку</p>
     <div class="qr-img" id="qrContainer"><span style="color:var(--text2);font-size:13px">⏳ Загрузка...</span></div>
     <div class="qr-url" id="pageUrl"></div>
@@ -386,80 +373,56 @@ body::after{width:500px;height:500px;background:radial-gradient(circle,rgba(74,1
 
 <script>
 (function(){
-const KEY='doomscore_v2';
+const KEY='ds_v3';
 const C=['#e94560','#ff6b81','#ff9f43','#54a0ff','#5f27cd','#1dd1a1','#00d2d3','#f368e0'];
+function gD(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch{return[]}}
+function sD(d){try{localStorage.setItem(KEY,JSON.stringify(d))}catch(e){alert('Не удалось сохранить.')}}
+function cD(){try{localStorage.removeItem(KEY)}catch{}}
 
-function getData(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch{return[]}}
-function saveData(d){try{localStorage.setItem(KEY,JSON.stringify(d))}catch(e){alert('Не удалось сохранить ответ.')}}
-function clearData(){try{localStorage.removeItem(KEY)}catch{}}
-
-const questions=[
-  {q:'q1',tag:'Личные привычки',text:'Сколько времени в день ты проводишь в соцсетях?',sub:'Честно, данные анонимны',
-    options:[{v:'0-1',ico:'☕',l:'Менее 1 часа — захожу по делу'},{v:'1-3',ico:'📱',l:'1–3 часа — ещё контролирую'},{v:'3-5',ico:'😬',l:'3–5 часов — залипаю чаще, чем хотелось бы'},{v:'5+',ico:'🔥',l:'Более 5 часов — телефон — часть тела'}]},
-  {q:'q2',tag:'Осознанность',text:'Как часто ты ловишь себя на бесцельном скроллинге?',sub:'Открыл «на секунду» — вышел через час?',
-    options:[{v:'never',ico:'🧘',l:'Почти никогда',s:'Я контролирую своё внимание'},{v:'sometimes',ico:'🤷',l:'Иногда бывает',s:'Но в меру'},{v:'often',ico:'😰',l:'Часто',s:'Залипаю регулярно'},{v:'constantly',ico:'💀',l:'Постоянно',s:'Это уже автоматическая привычка'}]},
-  {q:'q3',tag:'Эмоции',text:'Что ты чувствуешь после скроллинга?',sub:'Полистай ленту 15–20 минут и отрефлексируй',
-    options:[{v:'better',ico:'😌',l:'Спокойствие',s:'Я в курсе, это приятно'},{v:'nothing',ico:'😐',l:'Ничего особенного',s:'Нейтрально'},{v:'anxious',ico:'😟',l:'Тревогу',s:'Мир кажется опасным'},{v:'depressed',ico:'😞',l:'Подавленность',s:'Чувствую усталость и апатию'}]},
-  {q:'q4',tag:'Самооценка',text:'Оцени уровень тревоги за последнюю неделю',sub:'0 — полный дзен, 10 — постоянное напряжение',range:true,min:0,max:10},
-  {q:'q5',tag:'Контроль',text:'Пытался ли ты ограничить время в соцсетях?',sub:'Были ли попытки вырваться из ленты?',
-    options:[{v:'no',ico:'😎',l:'Нет, меня всё устраивает'},{v:'tried',ico:'🥲',l:'Пытался, но сорвался'},{v:'yes',ico:'💪',l:'Да, и успешно'}]},
-  {q:'q6',tag:'Коммуникация',text:'Как думскролинг влияет на твоё общение с людьми?',sub:'Замечаешь ли ты разницу в реальном разговоре?',
-    options:[{v:'none',ico:'✅',l:'Не замечаю влияния',s:'Я разделяю онлайн и реальность'},{v:'irritable',ico:'😤',l:'Стал более раздражительным',s:'В общении с близкими и коллегами'},{v:'less',ico:'🏠',l:'Меньше живого общения',s:'Заменяю реальные встречи лентой'},{v:'distracted',ico:'📵',l:'Сложно оторваться от телефона при разговоре',s:'Даже когда кто-то рядом'}]},
-  {q:'q7',tag:'Команда',text:'Как часто ты отвлекаешься на телефон во время разговора или пары?',sub:'Честно — это влияет на командную работу',
-    options:[{v:'never',ico:'🎯',l:'Стараюсь не отвлекаться',s:'Телефон на беззвучном'},{v:'rarely',ico:'👁️',l:'Редко, но бывает',s:'Если важное уведомление'},{v:'often',ico:'😅',l:'Часто проверяю уведомления',s:'Даже когда говорят другие'},{v:'always',ico:'📱',l:'Постоянно — это уже привычка',s:'Телефон всегда в руке'}]},
-  {q:'q8',tag:'Сон',text:'Влияет ли скроллинг на твой сон?',sub:'Листаешь ленту перед сном или ночью?',
-    options:[{v:'no',ico:'😴',l:'Нет, сон не страдает'},{v:'sometimes',ico:'😬',l:'Бывает — засыпаю позже из-за телефона'},{v:'yes',ico:'🤡',l:'Да, я регулярно не высыпаюсь'}]},
-  {q:'q9',tag:'Продуктивность',text:'Влияет ли думскролинг на твою продуктивность?',sub:'Как часто ты отвлекаешься на ленту во время работы или учёбы?',
-    options:[{v:'no',ico:'💪',l:'Нет, я умею фокусироваться'},{v:'slightly',ico:'😕',l:'Немного — иногда залипаю'},{v:'yes',ico:'💀',l:'Да, мне сложно работать без проверки ленты'}]},
-  {q:'q10',tag:'Осознанность',text:'Готов ли ты изменить привычку скроллинга?',sub:'Честно — есть ли желание что-то менять?',
-    options:[{v:'no',ico:'😎',l:'Нет, меня всё устраивает'},{v:'think',ico:'🤔',l:'Думаю об этом, но ничего не делаю'},{v:'yes',ico:'🔥',l:'Да, я уже меняю привычки'}]},
-];
-
-function calcDoomscore(me){
-  if(!me) return {score:0,level:'neutral',desc:'Нет данных',tip:''};
+function calcDS(me){
+  if(!me)return{score:0,desc:'Нет данных',tip:''};
   let s=0;
-  if(me.q1==='0-1') s+=0; else if(me.q1==='1-3') s+=2; else if(me.q1==='3-5') s+=4; else if(me.q1==='5+') s+=6;
-  if(me.q2==='never') s+=0; else if(me.q2==='sometimes') s+=2; else if(me.q2==='often') s+=4; else if(me.q2==='constantly') s+=6;
-  if(me.q3==='better') s+=0; else if(me.q3==='nothing') s+=1; else if(me.q3==='anxious') s+=4; else if(me.q3==='depressed') s+=5;
-  s+= (me.anxiety||5) * 0.6;
-  if(me.q5==='no') s+=3; else if(me.q5==='tried') s+=2; else if(me.q5==='yes') s+=0;
-  if(me.q6==='none') s+=0; else if(me.q6==='irritable') s+=3; else if(me.q6==='less') s+=4; else if(me.q6==='distracted') s+=5;
-  if(me.q7==='never') s+=0; else if(me.q7==='rarely') s+=2; else if(me.q7==='often') s+=4; else if(me.q7==='always') s+=6;
-  if(me.q8==='no') s+=0; else if(me.q8==='sometimes') s+=2; else if(me.q8==='yes') s+=5;
-  if(me.q9==='no') s+=0; else if(me.q9==='slightly') s+=2; else if(me.q9==='yes') s+=5;
-  if(me.q10==='no') s+=3; else if(me.q10==='think') s+=1; else if(me.q10==='yes') s+=0;
+  if(me.q1==='0-1')s+=0;else if(me.q1==='1-3')s+=2;else if(me.q1==='3-5')s+=4;else if(me.q1==='5+')s+=6;
+  if(me.q2==='never')s+=0;else if(me.q2==='sometimes')s+=2;else if(me.q2==='often')s+=4;else if(me.q2==='constantly')s+=6;
+  if(me.q3==='better')s+=0;else if(me.q3==='nothing')s+=1;else if(me.q3==='anxious')s+=4;else if(me.q3==='depressed')s+=5;
+  s+=(me.anxiety||5)*.6;
+  if(me.q5==='no')s+=3;else if(me.q5==='tried')s+=2;else if(me.q5==='yes')s+=0;
+  if(me.q6==='none')s+=0;else if(me.q6==='irritable')s+=3;else if(me.q6==='less')s+=4;else if(me.q6==='distracted')s+=5;
+  if(me.q7==='never')s+=0;else if(me.q7==='rarely')s+=2;else if(me.q7==='often')s+=4;else if(me.q7==='always')s+=6;
+  if(me.q8==='no')s+=0;else if(me.q8==='sometimes')s+=2;else if(me.q8==='yes')s+=5;
+  if(me.q9==='no')s+=0;else if(me.q9==='slightly')s+=2;else if(me.q9==='yes')s+=5;
+  if(me.q10==='no')s+=3;else if(me.q10==='think')s+=1;else if(me.q10==='yes')s+=0;
   s=Math.min(50,Math.max(0,Math.round(s)));
-  let level,desc,tip;
-  if(s<=10){level='low';desc='Низкий уровень';tip='Ты отлично контролируешь своё внимание. Помоги друзьям — поделись своими привычками!'}
-  else if(s<=20){level='mild';desc='Лёгкий уровень';tip='Иногда залипаешь, но в целом контролируешь ситуацию. Обрати внимание на качество отдыха.'}
-  else if(s<=30){level='moderate';desc='Средний уровень';tip='Думскролинг уже отнимает заметное время. Попробуй таймеры и цифровой детокс перед сном.'}
-  else if(s<=40){level='high';desc='Высокий уровень';tip='Телефон сильно влияет на твоё состояние. Рекомендуем отключить уведомления и ограничить соцсети до 2ч в день.'}
-  else{level='critical';desc='Критический уровень';tip='Срочно нужен цифровой детокс! Начни с 30 минут без телефона перед сном и постепенно сокращай время.'}
-  return{score:s,level,desc,tip};
+  let desc,tip;
+  if(s<=10){desc='Низкий уровень';tip='Ты отлично контролируешь внимание! Поделись опытом с друзьями.'}
+  else if(s<=20){desc='Лёгкий уровень';tip='Иногда залипаешь, но контролируешь ситуацию. Следи за качеством отдыха.'}
+  else if(s<=30){desc='Средний уровень';tip='Думскролинг уже отнимает время. Попробуй таймеры и детокс перед сном.'}
+  else if(s<=40){desc='Высокий уровень';tip='Телефон сильно влияет на состояние. Отключи уведомления, ограничь соцсети до 2ч.'}
+  else{desc='Критический уровень';tip='Срочно нужен цифровой детокс! 30 мин без телефона перед сном, постепенно сокращай время.'}
+  return{score:s,desc,tip};
 }
 
-function calcProfile(all){
-  let n=all.length; if(!n)return[];
-  let heavy=all.filter(r=>r.q1==='3-5'||r.q1==='5+').length;
-  let anxAvg=all.reduce((s,r)=>s+(r.anxiety||0),0)/n;
-  let anxC=all.filter(r=>r.q3==='anxious'||r.q3==='depressed').length;
-  let distr=all.filter(r=>r.q7==='often'||r.q7==='always').length;
-  let sleepAff=all.filter(r=>r.q8==='yes'||r.q8==='sometimes').length;
-  let prodAff=all.filter(r=>r.q9==='yes'||r.q9==='slightly').length;
-  let changeW=all.filter(r=>r.q10==='think'||r.q10==='yes').length;
+function calcProf(all){
+  let n=all.length;if(!n)return[];
+  let h=all.filter(r=>r.q1==='3-5'||r.q1==='5+').length;
+  let ax=all.reduce((s,r)=>s+(r.anxiety||0),0)/n;
+  let nc=all.filter(r=>r.q3==='anxious'||r.q3==='depressed').length;
+  let dr=all.filter(r=>r.q7==='often'||r.q7==='always').length;
+  let sl=all.filter(r=>r.q8==='yes'||r.q8==='sometimes').length;
+  let pr=all.filter(r=>r.q9==='yes'||r.q9==='slightly').length;
+  let cw=all.filter(r=>r.q10==='think'||r.q10==='yes').length;
   return[
-    {ico:'📱',val:Math.round(heavy/n*100)+'%',lbl:'Скроллят >3ч'},
-    {ico:'😰',val:anxAvg.toFixed(1),lbl:'Ср. тревога /10'},
-    {ico:'😟',val:Math.round(anxC/n*100)+'%',lbl:'Тревога после'},
-    {ico:'🌙',val:Math.round(sleepAff/n*100)+'%',lbl:'Сон страдает'},
-    {ico:'💼',val:Math.round(prodAff/n*100)+'%',lbl:'Продуктивность ↓'},
-    {ico:'🔄',val:Math.round(changeW/n*100)+'%',lbl:'Хотят менять'},
+    {ico:'📱',val:Math.round(h/n*100)+'%',lbl:'Скроллят >3ч'},
+    {ico:'😰',val:ax.toFixed(1),lbl:'Ср. тревога /10'},
+    {ico:'😟',val:Math.round(nc/n*100)+'%',lbl:'Тревога после'},
+    {ico:'🌙',val:Math.round(sl/n*100)+'%',lbl:'Сон страдает'},
+    {ico:'💼',val:Math.round(pr/n*100)+'%',lbl:'Продуктивность ↓'},
+    {ico:'🔄',val:Math.round(cw/n*100)+'%',lbl:'Хотят менять'},
   ];
 }
 
-function renderCharts(all){
-  const cc=document.getElementById('chartsContainer');
-  cc.innerHTML='';
+function rCharts(all){
+  const cc=$('chartsContainer');cc.innerHTML='';
   const defs=[
     {t:'Время в соцсетях',k:'q1',lv:['0-1','1-3','3-5','5+'],ln:['<1ч','1–3ч','3–5ч','>5ч']},
     {t:'Частота скроллинга',k:'q2',lv:['never','sometimes','often','constantly'],ln:['Никогда','Иногда','Часто','Постоянно']},
@@ -470,49 +433,41 @@ function renderCharts(all){
     {t:'Продуктивность',k:'q9',lv:['no','slightly','yes'],ln:['Фокус','Немного↓','Сильно↓']},
     {t:'Готовность менять',k:'q10',lv:['no','think','yes'],ln:['Нет','Думаю','Уже меняю']},
   ];
-  const barWidths=[];
+  const bw=[];
   defs.forEach(function(d,idx){
     let cnt={},tl=0;
     d.lv.forEach(function(v){cnt[v]=0});
     all.forEach(function(r){let v=r[d.k];if(v&&cnt.hasOwnProperty(v)){cnt[v]++;tl++}});
     let box=document.createElement('div');box.className='chart-box';
-    let html='<h3>'+d.t+' <span class="n">('+tl+')</span></h3>';
-    let w=[];
+    let html='<h3>'+d.t+' <span class="n">('+tl+')</span></h3>';let w=[];
     d.lv.forEach(function(v,i){
-      let pct=tl?Math.round(cnt[v]/tl*100):0;
-      w.push(pct);
-      let color=C[i%C.length];
-      html+='<div class="bar-row"><span class="bar-label">'+d.ln[i]+'</span><div class="bar-track"><div class="bar-fill" id="bar'+idx+'_'+i+'" style="width:0%;background:'+color+'"><span class="bar-val">'+cnt[v]+'</span></div></div><span class="bar-count">'+cnt[v]+'</span></div>';
+      let pct=tl?Math.round(cnt[v]/tl*100):0;w.push(pct);
+      let clr=C[i%C.length];
+      html+='<div class="bar-row"><span class="bar-label">'+d.ln[i]+'</span><div class="bar-track"><div class="bar-fill" id="b'+idx+'_'+i+'" style="width:0%;background:'+clr+'"><span class="bar-val">'+cnt[v]+'</span></div></div><span class="bar-count">'+cnt[v]+'</span></div>';
     });
-    barWidths.push(w);
-    box.innerHTML=html;
-    cc.appendChild(box);
-    setTimeout(function(){animateBar(idx,barWidths[idx])},50+idx*60);
+    bw.push(w);box.innerHTML=html;cc.appendChild(box);
+    setTimeout(function(){aB(idx,bw[idx])},50+idx*60);
   });
 }
+function aB(idx,pcts){const f=document.querySelectorAll('#chartsContainer .chart-box:nth-child('+(idx+1)+') .bar-fill');f.forEach(function(el,i){let p=pcts[i]||0;el.style.width=p+'%';setTimeout(function(){el.classList.add('show')},600)})}
 
-function animateBar(idx,pcts){
-  const fills=document.querySelectorAll('#chartsContainer .chart-box:nth-child('+(idx+1)+') .bar-fill');
-  fills.forEach(function(el,i){let p=pcts[i]||0;el.style.width=p+'%';setTimeout(function(){el.classList.add('show')},600)});
-}
-
-const DOM={};
-['welcomeScreen','slidesWrap','surveyForm','progressFill','progressNum','prevBtn','nextBtn','surveyCard','resultsCard','anxietySlider','anxietyDisplay','profileGrid','kpiTotal','kpiAnxiety','kpiHeavy','kpiDistract','insightBar','chartsContainer','discussItems','shareBtn','resetBtn','siteBtn','qrModal','qrContainer','pageUrl','closeModal','confetti','doomscoreBox','doomscoreDisplay','doomscoreDesc','doomscoreTip'].forEach(function(id){DOM[id]=document.getElementById(id)});
+function $(id){return document.getElementById(id)}
+const D={};
+['welcome','slidesWrap','surveyForm','progressFill','progressNum','prevBtn','nextBtn','surveyCard','wrapper','resultsWrap','anxietySlider','anxietyDisplay','profileGrid','kpiTotal','kpiAnxiety','kpiHeavy','kpiDistract','insightBar','chartsContainer','discussItems','shareBtn','resetBtn','siteBtn','qrModal','qrContainer','pageUrl','closeModal','confetti','doomscoreDisplay','doomscoreDesc','doomscoreTip'].forEach(function(id){D[id]=$(id)});
 
 const T=10;let cur=0;
 
 function go(i){
   document.querySelectorAll('.slide').forEach(function(s,j){s.classList.toggle('active',j===i)});
-  cur=i;DOM.progressFill.style.width=((i+1)/T*100)+'%';DOM.progressNum.textContent=(i+1)+'/'+T;
-  DOM.prevBtn.disabled=i===0;DOM.nextBtn.textContent=i===T-1?'📨 Отправить':'Далее →';
+  cur=i;D.progressFill.style.width=((i+1)/T*100)+'%';D.progressNum.textContent=(i+1)+'/'+T;
+  D.prevBtn.disabled=i===0;D.nextBtn.textContent=i===T-1?'📨 Отправить':'Далее →';
   document.querySelectorAll('.slide').forEach(function(sl,idx){
-    let dots=sl.querySelectorAll('.step-dot');
-    dots.forEach(function(d,di){d.className='step-dot';if(di<idx)d.classList.add('done');else if(di===idx)d.classList.add('active')});
+    let d=sl.querySelectorAll('.step-dot');
+    d.forEach(function(dt,di){dt.className='step-dot';if(di<idx)dt.classList.add('done');else if(di===idx)dt.classList.add('active')});
   });
   let sub=document.querySelectorAll('.slide')[i].querySelector('.sub');sub.classList.remove('err');
   if(sub.dataset.orig){sub.textContent=sub.dataset.orig;delete sub.dataset.orig}
-  let rangeSl=document.querySelectorAll('.slide')[i].querySelector('input[type=range]');
-  if(rangeSl)setTimeout(function(){rangeSl.focus()},300);
+  document.querySelectorAll('.slide')[i].querySelector('input[type=range]')&&setTimeout(function(){document.querySelector('.slide.active input[type=range]')&&document.querySelector('.slide.active input[type=range]').focus()},300);
 }
 
 document.querySelectorAll('.opt').forEach(function(el){
@@ -524,107 +479,102 @@ document.querySelectorAll('.opt').forEach(function(el){
   });
 });
 
-DOM.prevBtn.onclick=function(){if(cur>0)go(cur-1)};
-DOM.nextBtn.onclick=function(){
+D.prevBtn.onclick=function(){if(cur>0)go(cur-1)};
+D.nextBtn.onclick=function(){
   if(cur<T-1){
     let sl=document.querySelectorAll('.slide')[cur];
     let inps=sl.querySelectorAll('input[type=radio]');let range=sl.querySelector('input[type=range]');let ans=false;
     inps.forEach(function(i){if(i.checked)ans=true});if(range)ans=true;
     if(inps.length>0&&!ans){
       let sub=sl.querySelector('.sub');if(!sub.dataset.orig)sub.dataset.orig=sub.textContent;
-      sub.textContent='Выбери один вариант';sub.classList.add('err');return;
+      sub.textContent='Выбери вариант';sub.classList.add('err');return;
     }
     go(cur+1);
-  }else{submitSurvey()}
+  }else{sub()}
 };
-DOM.anxietySlider.oninput=function(){DOM.anxietyDisplay.textContent=this.value};
+D.anxietySlider.oninput=function(){D.anxietyDisplay.textContent=this.value};
 
-function submitSurvey(){
-  let fd=new FormData(DOM.surveyForm);
-  let ans={};
+function sub(){
+  let fd=new FormData(D.surveyForm);let ans={};
   ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10'].forEach(function(k){
     let v=fd.get(k);if(k==='q4')ans.anxiety=parseInt(v,10);else if(v)ans[k]=v;
   });
-  if(!ans.q1||!ans.q2||!ans.q3||!ans.q5||!ans.q6||!ans.q7||!ans.q8||!ans.q9||!ans.q10){
-    alert('Ответь на все вопросы');return;
-  }
-  let d=getData();d.push(ans);saveData(d);
-  DOM.surveyCard.classList.add('hidden');DOM.resultsCard.classList.remove('hidden');DOM.resultsCard.classList.add('results-enter');
-  renderResults();launchConfetti();window.scrollTo({top:0,behavior:'smooth'});
+  if(!ans.q1||!ans.q2||!ans.q3||!ans.q5||!ans.q6||!ans.q7||!ans.q8||!ans.q9||!ans.q10){alert('Ответь на все вопросы');return}
+  let d=gD();d.push(ans);sD(d);
+  D.surveyCard.classList.add('hidden');D.resultsWrap.classList.remove('hidden');D.wrapper.classList.add('survey-done');
+  D.resultsContent.style.animation='resIn .6s ease';
+  rR();lC();window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function renderResults(){
-  let all=getData();if(!all.length)return;
-  let me=all[all.length-1];
-  let ds=calcDoomscore(me);
-  let scoreColors={low:'#1dd1a1',mild:'#54a0ff',moderate:'#ff9f43',high:'#e94560',critical:'#e94560'};
-  DOM.doomscoreDisplay.textContent=ds.score+'/50';
-  DOM.doomscoreDisplay.style.background='linear-gradient(135deg,'+scoreColors[ds.level]+','+(ds.level==='critical'?'#ff6b81':ds.level==='high'?'#ff6b81':ds.level==='moderate'?'#ff9f43':ds.level==='mild'?'#54a0ff':'#1dd1a1')+')';
-  DOM.doomscoreDisplay.style.webkitBackgroundClip='text';DOM.doomscoreDisplay.style.webkitTextFillColor='transparent';
-  DOM.doomscoreDesc.textContent=ds.desc;
-  DOM.doomscoreTip.textContent=ds.tip;
-
-  let profile=calcProfile(all);
-  DOM.profileGrid.innerHTML='';
-  profile.forEach(function(p){DOM.profileGrid.innerHTML+='<div class="profile-item"><span class="pi-ico">'+p.ico+'</span><span class="pi-val">'+p.val+'</span><span class="pi-lbl">'+p.lbl+'</span></div>'});
+function rR(){
+  let all=gD();if(!all.length)return;
+  let me=all[all.length-1];let ds=calcDS(me);
+  let sc={low:'#1dd1a1',mild:'#54a0ff',moderate:'#ff9f43',high:'#e94560',critical:'#e94560'};
+  let lvl=ds.score<=10?'low':ds.score<=20?'mild':ds.score<=30?'moderate':ds.score<=40?'high':'critical';
+  D.doomscoreDisplay.textContent=ds.score+'/50';
+  D.doomscoreDisplay.style.background='linear-gradient(135deg,'+sc[lvl]+','+(lvl==='critical'||lvl==='high'?'#ff6b81':lvl==='moderate'?'#ff9f43':lvl==='mild'?'#54a0ff':'#1dd1a1')+')';
+  D.doomscoreDisplay.style.webkitBackgroundClip='text';D.doomscoreDisplay.style.webkitTextFillColor='transparent';D.doomscoreDisplay.style.backgroundClip='text';
+  D.doomscoreDesc.textContent=ds.desc;D.doomscoreTip.textContent=ds.tip;
+  let prof=calcProf(all);D.profileGrid.innerHTML='';
+  prof.forEach(function(p){D.profileGrid.innerHTML+='<div class="profile-item"><span class="pi-ico">'+p.ico+'</span><span class="pi-val">'+p.val+'</span><span class="pi-lbl">'+p.lbl+'</span></div>'});
   let n=all.length;
-  let avgAnx=all.reduce(function(s,r){return s+(r.anxiety||0)},0)/n;
-  let heavy=all.filter(function(r){return r.q1==='3-5'||r.q1==='5+'}).length;
-  let distr=all.filter(function(r){return r.q7==='often'||r.q7==='always'}).length;
-  DOM.kpiTotal.textContent=n;DOM.kpiAnxiety.textContent=avgAnx.toFixed(1);DOM.kpiHeavy.textContent=heavy;DOM.kpiDistract.textContent=distr;
-  let anxC=all.filter(function(r){return r.q3==='anxious'||r.q3==='depressed'}).length;
-  let ap=Math.round(anxC/n*100);
-  let ib=DOM.insightBar;
-  if(ap>50||avgAnx>6)ib.innerHTML='⚠️ <strong>'+ap+'%</strong> группы чувствует тревогу или подавленность после скроллинга. Средняя тревога — <strong>'+avgAnx.toFixed(1)+'/10</strong>.';
-  else if(ap>30)ib.innerHTML='📊 <strong>'+ap+'%</strong> испытывает дискомфорт. Средняя тревога — <strong>'+avgAnx.toFixed(1)+'/10</strong>.';
-  else ib.innerHTML='✅ Только <strong>'+ap+'%</strong> чувствует тревогу. Средняя тревога — <strong>'+avgAnx.toFixed(1)+'/10</strong>.';
-  renderCharts(all);
-  let dc=DOM.discussItems;let prompts=[];
-  if(ap>40||avgAnx>5)prompts.push('Большая часть группы испытывает тревогу после скроллинга. Как это влияет на атмосферу в команде?');
-  if(heavy/n>0.4)prompts.push('Многие проводят в соцсетях 3+ часа. Какие правила работы с телефоном можно ввести на парах/встречах?');
-  if(distr/n>0.3)prompts.push('Некоторым сложно оторваться от телефона при разговоре. Как это мешает командной работе?');
-  let irr=all.filter(function(r){return r.q6==='irritable'||r.q6==='distracted'}).length;
-  if(irr/n>0.3)prompts.push('Думскролинг влияет на качество общения. Что можно предложить вместо скроллинга в перерывах?');
-  prompts.push('Какие шаги каждый из нас готов сделать прямо сейчас, чтобы снизить влияние телефона?');
-  if(ds.score>=30)prompts.push('У тебя высокий уровень думскролинга. Что изменишь в первую очередь?');
-  dc.innerHTML=prompts.map(function(p,i){return '<div class="d-item"><span class="d-num">'+(i+1)+'</span><span class="d-text">'+p+'</span></div>'}).join('');
+  let ax=all.reduce(function(s,r){return s+(r.anxiety||0)},0)/n;
+  let h=all.filter(function(r){return r.q1==='3-5'||r.q1==='5+'}).length;
+  let dr=all.filter(function(r){return r.q7==='often'||r.q7==='always'}).length;
+  D.kpiTotal.textContent=n;D.kpiAnxiety.textContent=ax.toFixed(1);D.kpiHeavy.textContent=h;D.kpiDistract.textContent=dr;
+  let nc=all.filter(function(r){return r.q3==='anxious'||r.q3==='depressed'}).length;
+  let ap=Math.round(nc/n*100);
+  D.insightBar.innerHTML=ap>50||ax>6?'⚠️ <strong>'+ap+'%</strong> группы чувствует тревогу. Средняя — <strong>'+ax.toFixed(1)+'/10</strong>.':ap>30?'📊 <strong>'+ap+'%</strong> испытывает дискомфорт. Средняя — <strong>'+ax.toFixed(1)+'/10</strong>.':'✅ <strong>'+ap+'%</strong> чувствует тревогу. Средняя — <strong>'+ax.toFixed(1)+'/10</strong>.';
+  rCharts(all);
+  let dc=D.discussItems;let p=[];
+  if(ap>40||ax>5)p.push('Большая часть группы испытывает тревогу. Как это влияет на атмосферу?');
+  if(h/n>.4)p.push('Многие проводят 3+ часа в соцсетях. Какие правила можно ввести?');
+  if(dr/n>.3)p.push('Некоторым сложно оторваться от телефона. Как это мешает работе?');
+  let ir=all.filter(function(r){return r.q6==='irritable'||r.q6==='distracted'}).length;
+  if(ir/n>.3)p.push('Думскролинг влияет на общение. Чем заменить скроллинг в перерывах?');
+  p.push('Какие шаги готов сделать каждый прямо сейчас?');
+  if(ds.score>=30)p.push('У тебя высокий уровень. Что изменишь в первую очередь?');
+  dc.innerHTML=p.map(function(pp,i){return '<div class="d-item"><span class="d-num">'+(i+1)+'</span><span class="d-text">'+pp+'</span></div>'}).join('');
 }
 
-function launchConfetti(){
-  let c=DOM.confetti;let ctx=c.getContext('2d');
+function lC(){
+  let c=D.confetti;let ctx=c.getContext('2d');
   c.width=window.innerWidth;c.height=window.innerHeight;
-  let p=[],colors=['#e94560','#ff6b81','#ff9f43','#54a0ff','#5f27cd','#1dd1a1','#f368e0','#ffd700'];
-  for(let i=0;i<100;i++)p.push({x:Math.random()*c.width,y:Math.random()*c.height-c.height,w:Math.random()*8+3,h:Math.random()*5+2,color:colors[Math.floor(Math.random()*colors.length)],vx:(Math.random()-.5)*2,vy:Math.random()*2+2,rot:Math.random()*360,rv:(Math.random()-.5)*5,op:1});
-  let f=0;function anim(){ctx.clearRect(0,0,c.width,c.height);let a=0;
+  let p=[],cl=['#e94560','#ff6b81','#ff9f43','#54a0ff','#5f27cd','#1dd1a1','#f368e0','#ffd700'];
+  for(let i=0;i<100;i++)p.push({x:Math.random()*c.width,y:Math.random()*c.height-c.height,w:Math.random()*8+3,h:Math.random()*5+2,color:cl[Math.floor(Math.random()*cl.length)],vx:(Math.random()-.5)*2,vy:Math.random()*2+2,rot:Math.random()*360,rv:(Math.random()-.5)*5,op:1});
+  let f=0;
+  (function an(){ctx.clearRect(0,0,c.width,c.height);let a=0;
     p.forEach(function(q){q.x+=q.vx;q.y+=q.vy;q.vy+=.03;q.rot+=q.rv;if(q.y>c.height+20||f>150)q.op-=.02;if(q.op>0){a++;ctx.save();ctx.translate(q.x,q.y);ctx.rotate(q.rot*Math.PI/180);ctx.globalAlpha=Math.max(0,q.op);ctx.fillStyle=q.color;ctx.fillRect(-q.w/2,-q.h/2,q.w,q.h);ctx.restore()}});
-    f++;if(a)requestAnimationFrame(anim);else if(c.parentNode)c.parentNode.removeChild(c)}anim();
+    f++;if(a)requestAnimationFrame(an)})();
 }
 
-DOM.shareBtn.onclick=function(){
-  let url=window.location.href.split('?')[0];DOM.pageUrl.textContent=url;
-  DOM.qrContainer.innerHTML='<span style="color:var(--text2);font-size:13px">⏳ Загрузка...</span>';
+D.shareBtn.onclick=function(){
+  let url=window.location.href.split('?')[0];D.pageUrl.textContent=url;
+  D.qrContainer.innerHTML='<span style="color:var(--text2);font-size:13px">⏳ Загрузка...</span>';
   let img=new Image();
-  img.onload=function(){DOM.qrContainer.innerHTML='';DOM.qrContainer.appendChild(img)};
-  img.onerror=function(){DOM.qrContainer.innerHTML='<span style="color:var(--accent);font-size:12px">⚠️ QR не загрузился</span>'};
+  img.onload=function(){D.qrContainer.innerHTML='';D.qrContainer.appendChild(img)};
+  img.onerror=function(){D.qrContainer.innerHTML='<span style="color:var(--accent);font-size:12px">⚠️ QR не загрузился</span>'};
   img.src='https://api.qrserver.com/v1/create-qr-code/?size=180x180&data='+encodeURIComponent(url);
   img.style.width='160px';img.style.height='160px';img.style.borderRadius='10px';img.style.background='#fff';img.style.padding='5px';
-  DOM.qrModal.classList.add('active');
+  D.qrModal.classList.add('active');
 };
-DOM.closeModal.onclick=function(){DOM.qrModal.classList.remove('active')};
-DOM.qrModal.onclick=function(e){if(e.target===this)this.classList.remove('active')};
-DOM.resetBtn.onclick=function(){if(confirm('Очистить все ответы?')){clearData();location.reload()}};
-DOM.siteBtn.onclick=function(){window.location.href='index.html'};
+D.closeModal.onclick=function(){D.qrModal.classList.remove('active')};
+D.qrModal.onclick=function(e){if(e.target===this)this.classList.remove('active')};
+D.resetBtn.onclick=function(){if(confirm('Очистить все ответы?')){cD();location.reload()}};
+D.siteBtn.onclick=function(){window.location.href='index.html'};
+
+D.startBtn.onclick=function(){D.welcome.style.display='none';D.slidesWrap.style.display='block';go(0)};
 
 document.addEventListener('keydown',function(e){
-  if(DOM.qrModal.classList.contains('active'))return;
-  if(e.key==='ArrowRight'||e.key==='Enter')DOM.nextBtn.click();
-  if(e.key==='ArrowLeft')DOM.prevBtn.click();
+  if(D.qrModal.classList.contains('active'))return;
+  if(e.key==='ArrowRight'||e.key==='Enter')D.nextBtn.click();
+  if(e.key==='ArrowLeft')D.prevBtn.click();
 });
 
 (function(){
-  let d=getData();
+  let d=gD();
   if(d.length<6){
-    let seeds=[
+    let sd=[
       {q1:'1-3',q2:'often',q3:'anxious',anxiety:6,q5:'tried',q6:'irritable',q7:'often',q8:'sometimes',q9:'slightly',q10:'think',ts:Date.now()-60000},
       {q1:'3-5',q2:'constantly',q3:'depressed',anxiety:8,q5:'tried',q6:'distracted',q7:'always',q8:'yes',q9:'yes',q10:'think',ts:Date.now()-120000},
       {q1:'0-1',q2:'sometimes',q3:'better',anxiety:3,q5:'yes',q6:'none',q7:'rarely',q8:'no',q9:'no',q10:'yes',ts:Date.now()-180000},
@@ -632,10 +582,8 @@ document.addEventListener('keydown',function(e){
       {q1:'5+',q2:'constantly',q3:'depressed',anxiety:9,q5:'tried',q6:'irritable',q7:'always',q8:'sometimes',q9:'yes',q10:'think',ts:Date.now()-300000},
       {q1:'1-3',q2:'sometimes',q3:'nothing',anxiety:4,q5:'tried',q6:'none',q7:'often',q8:'no',q9:'slightly',q10:'yes',ts:Date.now()-360000},
     ];
-    seeds.forEach(function(s){
-      if(!d.find(function(r){return r.ts===s.ts}))d.push(s);
-    });
-    saveData(d);
+    sd.forEach(function(s){if(!d.find(function(r){return r.ts===s.ts}))d.push(s)});
+    sD(d);
   }
 })();
 })();
